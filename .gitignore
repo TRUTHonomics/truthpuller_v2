@@ -143,17 +143,16 @@ dmypy.json
 # Cython debug symbols
 cython_debug/
 
-# KFL/QBN Specific
+# --- Project ---
+nul
 _log/
 _log/archive/
 *.log
-.numba_cache/
-__pycache__/
 .cursor/
 .docs/
-architecture.yaml
+_OUD/
+_backup/
+.env
+.env.*
+!.env.example
 *.pdf
-*.png
-*.json
-!requirements.txt
-!README.md
