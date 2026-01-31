@@ -1,0 +1,152 @@
+# Phase 1 Prompt: Per-Post Analysis
+# Script: scripts/analyze_posts_phase1.py
+# Analyzes individual posts IN ISOLATION to assess price movement potential
+
+[meta]
+name = "phase1_post_analysis"
+version = "2.0"
+description = "Per-post LLM analysis for impact likelihood and mechanism scoring"
+
+[template]
+# Placeholders: {content}, {timestamp}, {post_type}
+user_prompt = """
+Analyze the following Truth Social post IN ISOLATION (without looking at any price data or other posts). Your task is to estimate how likely this post, by itself, could move the TRUMP coin price, and which mechanism is most plausible.
+
+POST CONTENT:
+{content}
+
+TIMESTAMP: {timestamp}
+POST TYPE: {post_type}
+
+You MUST use a 0.00-1.00 scale for all scores. Always use a dot (.) as decimal separator and two decimals.
+
+## Dimensions
+
+1. impact_likelihood
+How likely is this post, by itself, to move the TRUMP coin price in either direction?
+
+- 0.00 = Generic/routine, no market relevance
+- 0.50 = Potentially relevant but uncertain
+- 1.00 = Highly likely to cause significant price movement
+
+Consider: explicit crypto mentions, trading language, strong calls to action, or clear market-related news.
+
+2. suspicion_score
+How "coded" or unusual does this post seem, as a potential coordinated or insider signal?
+
+- 0.00 = Normal, expected political or personal communication
+- 0.50 = Somewhat unusual but still plausibly normal
+- 1.00 = Highly suspicious, looks like a potential hidden message or coded signal
+
+Consider: odd numbers or time patterns, strange phrasing, lack of clear public message, or content that feels "off" compared to typical Trump posts.
+
+3. sentiment_intensity
+How strong is the emotional tone (positive or negative)?
+
+- 0.00 = Neutral, factual
+- 0.50 = Moderate emotion
+- 1.00 = Extreme emotion (very positive or very negative)
+
+Ignore direction (bullish/bearish); measure only intensity.
+
+4. news_value
+Does this post contain new, non-trivial information that could matter to markets?
+
+- 0.00 = No news value (repeats known talking points, generic slogans)
+- 0.50 = Minor news (small update, modest relevance)
+- 1.00 = Major announcement or breaking news
+
+5. mechanism_scores
+Relative plausibility that each mechanism is the MAIN explanation:
+
+- mechanism_a: Public market reaction (post goes viral, retail attention, hype)
+- mechanism_b: Coordinated signals (coded/insider communication)
+- mechanism_c: No meaningful market impact (baseline noise / coincidence)
+
+Rules:
+- Each score must be between 0.00 and 1.00.
+- The three scores should roughly sum to 1.00 (e.g. 0.70 + 0.20 + 0.10).
+- If all mechanisms seem weak, mechanism_c_score should be the highest.
+
+## Mechanism B indicators (coded/insider)
+
+Increase mechanism_b_score and suspicion_score if you see:
+- Unusual word choices or phrasing
+- Specific numbers, times, or dates that feel out of place
+- Posts with no clear public news value
+- Seemingly random or nonsensical content
+
+## JSON output format
+
+Return ONLY valid JSON. No extra text, no markdown, no comments.
+
+Use this schema:
+
+{{
+  "impact_likelihood": 0.00,
+  "suspicion_score": 0.00,
+  "sentiment_intensity": 0.00,
+  "news_value": 0.00,
+  "mechanism_a_score": 0.00,
+  "mechanism_b_score": 0.00,
+  "mechanism_c_score": 0.00,
+  "likely_mechanisms": "A" or "B" or "C" or "AB",
+  "suspicious_elements": "description of suspicious features or null",
+  "detected_numbers": "specific numbers/dates/times seen in the post or null",
+  "unusual_phrases": "unusual word choices or patterns or null",
+  "reasoning": "1-3 short sentences summarizing why you chose these scores",
+  "confidence_calibration": 0.00
+}}
+
+Field-specific rules:
+
+- likely_mechanisms:
+  - "A"  = mechanism_a_score is clearly dominant.
+  - "B"  = mechanism_b_score is clearly dominant.
+  - "C"  = mechanism_c_score is clearly dominant.
+  - "AB" = BOTH A and B contribute meaningfully (typically mechanism_a_score >= 0.35 AND mechanism_b_score >= 0.35).
+  - Do NOT use any other combinations (no "AC" or "BC").
+
+- suspicious_elements:
+  - Give a short description if something feels coded or unusual.
+  - Use null if there is nothing notable.
+
+- detected_numbers:
+  - Mention any specific numbers, dates, or times that might matter ("47", "3:47 AM", "2028").
+  - Use null if none.
+
+- unusual_phrases:
+  - Capture clearly odd or distinctive phrases.
+  - Use null if none.
+
+- reasoning:
+  - Keep it brief (1-3 short sentences).
+  - Do NOT provide step-by-step chain-of-thought, only a concise justification.
+
+- confidence_calibration:
+  - 0.00 = very uncertain about your own labels
+  - 0.50 = moderate confidence
+  - 1.00 = very confident that these labels are appropriate for this post
+"""
+
+[output_schema]
+# JSON schema fields for validation
+fields = [
+  "impact_likelihood",
+  "suspicion_score", 
+  "sentiment_intensity",
+  "news_value",
+  "mechanism_a_score",
+  "mechanism_b_score",
+  "mechanism_c_score",
+  "likely_mechanisms",
+  "suspicious_elements",
+  "detected_numbers",
+  "unusual_phrases",
+  "reasoning",
+  "confidence_calibration"
+]
+
+# Valid values for likely_mechanisms
+likely_mechanisms_values = ["A", "B", "C", "AB"]
+

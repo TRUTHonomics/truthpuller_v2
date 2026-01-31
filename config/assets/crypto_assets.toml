@@ -1,0 +1,2020 @@
+# Crypto Assets Configuration
+# Generated from symbols.symbols database table
+# Generated at: 2025-12-09T15:54:01.218792+00:00
+#
+# Structure per asset:
+# [assets.<SYMBOL>]
+# asset_id = <database id>
+# symbol = "<bybit_symbol>"
+# base = "<base currency>"
+# quote = "<quote currency>"
+# tickers = ["TICKER1", "TICKER2", ...]  # variations for text matching
+
+[meta]
+asset_type = "crypto"
+generated_at = "2025-12-09T15:54:01.218805+00:00"
+total_assets = 286
+
+[assets]
+
+[assets.BTCUSDT]
+asset_id = 1
+symbol = "BTCUSDT"
+base = "BTC"
+quote = "USD"
+tickers = ["BITCOIN", "BTC", "BTCUSDT", "Bitcoin", "PF_XBTUSD"]
+
+[assets.ETHUSDT]
+asset_id = 2
+symbol = "ETHUSDT"
+base = "ETH"
+quote = "USD"
+tickers = ["ETH", "ETHER", "ETHEREUM", "ETHUSDT", "Ether", "Ethereum", "PF_ETHUSD"]
+
+[assets.ADAUSDT]
+asset_id = 3
+symbol = "ADAUSDT"
+base = "ADA"
+quote = "USD"
+tickers = ["ADA", "ADAUSDT", "CARDANO", "Cardano", "PF_ADAUSD"]
+
+[assets.SOLUSDT]
+asset_id = 4
+symbol = "SOLUSDT"
+base = "SOL"
+quote = "USD"
+tickers = ["PF_SOLUSD", "SOL", "SOLANA", "SOLUSDT", "Solana"]
+
+[assets.ATOMUSDT]
+asset_id = 5
+symbol = "ATOMUSDT"
+base = "ATOM"
+quote = "USD"
+tickers = ["ATOM", "ATOMUSDT", "COSMOS", "Cosmos", "PF_ATOMUSD"]
+
+[assets.BCHUSDT]
+asset_id = 6
+symbol = "BCHUSDT"
+base = "BCH"
+quote = "USD"
+tickers = ["BCH", "BCHUSDT", "BITCOIN CASH", "Bitcoin Cash", "PF_BCHUSD"]
+
+[assets.DOTUSDT]
+asset_id = 7
+symbol = "DOTUSDT"
+base = "DOT"
+quote = "USD"
+tickers = ["DOT", "DOTUSDT", "PF_DOTUSD", "POLKADOT", "Polkadot"]
+
+[assets.FILUSDT]
+asset_id = 8
+symbol = "FILUSDT"
+base = "FIL"
+quote = "USD"
+tickers = ["FIL", "FILECOIN", "FILUSDT", "Filecoin", "PF_FILUSD"]
+
+[assets.LINKUSDT]
+asset_id = 9
+symbol = "LINKUSDT"
+base = "LINK"
+quote = "USD"
+tickers = ["CHAINLINK", "Chainlink", "LINK", "LINKUSDT", "PF_LINKUSD"]
+
+[assets.LTCUSDT]
+asset_id = 10
+symbol = "LTCUSDT"
+base = "LTC"
+quote = "USD"
+tickers = ["LITECOIN", "LTC", "LTCUSDT", "Litecoin", "PF_LTCUSD"]
+
+[assets.AVAXUSDT]
+asset_id = 11
+symbol = "AVAXUSDT"
+base = "AVAX"
+quote = "USD"
+tickers = ["AVALANCHE", "AVAX", "AVAXUSDT", "Avalanche", "PF_AVAXUSD"]
+
+[assets.GMTUSDT]
+asset_id = 12
+symbol = "GMTUSDT"
+base = "GMT"
+quote = "USD"
+tickers = ["GMT", "GMTUSDT", "PF_GMTUSD", "STEPN"]
+
+[assets.LUNA2USDT]
+asset_id = 13
+symbol = "LUNA2USDT"
+base = "LUNA2"
+quote = "USD"
+tickers = ["LUNA2", "LUNA2USDT", "PF_LUNA2USD"]
+
+[assets.OPUSDT]
+asset_id = 14
+symbol = "OPUSDT"
+base = "OP"
+quote = "USD"
+tickers = ["OP", "OPTIMISM", "OPUSDT", "Optimism", "PF_OPUSD"]
+
+[assets.NEARUSDT]
+asset_id = 15
+symbol = "NEARUSDT"
+base = "NEAR"
+quote = "USD"
+tickers = ["NEAR", "NEAR PROTOCOL", "NEAR Protocol", "NEARUSDT", "PF_NEARUSD"]
+
+[assets.APEUSDT]
+asset_id = 16
+symbol = "APEUSDT"
+base = "APE"
+quote = "USD"
+tickers = ["APE", "APECOIN", "APEUSDT", "ApeCoin", "PF_APEUSD"]
+
+[assets.DOGEUSDT]
+asset_id = 17
+symbol = "DOGEUSDT"
+base = "DOGE"
+quote = "USD"
+tickers = ["DOGE", "DOGECOIN", "DOGEUSDT", "Doge", "Dogecoin", "PF_DOGEUSD"]
+
+[assets.MANAUSDT]
+asset_id = 18
+symbol = "MANAUSDT"
+base = "MANA"
+quote = "USD"
+tickers = ["DECENTRALAND", "Decentraland", "MANA", "MANAUSDT", "PF_MANAUSD"]
+
+[assets.CRVUSDT]
+asset_id = 19
+symbol = "CRVUSDT"
+base = "CRV"
+quote = "USD"
+tickers = ["CRV", "CRVUSDT", "CURVE", "Curve", "PF_CRVUSD"]
+
+[assets.AAVEUSDT]
+asset_id = 20
+symbol = "AAVEUSDT"
+base = "AAVE"
+quote = "USD"
+tickers = ["AAVE", "AAVEUSDT", "Aave", "PF_AAVEUSD"]
+
+[assets.SNXUSDT]
+asset_id = 21
+symbol = "SNXUSDT"
+base = "SNX"
+quote = "USD"
+tickers = ["PF_SNXUSD", "SNX", "SNXUSDT", "SYNTHETIX", "Synthetix"]
+
+[assets.ALGOUSDT]
+asset_id = 22
+symbol = "ALGOUSDT"
+base = "ALGO"
+quote = "USD"
+tickers = ["ALGO", "ALGORAND", "ALGOUSDT", "Algorand", "PF_ALGOUSD"]
+
+[assets.SANDUSDT]
+asset_id = 23
+symbol = "SANDUSDT"
+base = "SAND"
+quote = "USD"
+tickers = ["PF_SANDUSD", "SAND", "SANDBOX", "SANDUSDT", "Sandbox"]
+
+[assets.ENJUSDT]
+asset_id = 24
+symbol = "ENJUSDT"
+base = "ENJ"
+quote = "USD"
+tickers = ["ENJ", "ENJIN", "ENJUSDT", "Enjin", "PF_ENJUSD"]
+
+[assets.COMPUSDT]
+asset_id = 25
+symbol = "COMPUSDT"
+base = "COMP"
+quote = "USD"
+tickers = ["COMP", "COMPOUND", "COMPUSDT", "Compound", "PF_COMPUSD"]
+
+[assets.CHZUSDT]
+asset_id = 26
+symbol = "CHZUSDT"
+base = "CHZ"
+quote = "USD"
+tickers = ["CHILIZ", "CHZ", "CHZUSDT", "Chiliz", "PF_CHZUSD"]
+
+[assets.LPTUSDT]
+asset_id = 27
+symbol = "LPTUSDT"
+base = "LPT"
+quote = "USD"
+tickers = ["LPT", "LPTUSDT", "PF_LPTUSD"]
+
+[assets.BATUSDT]
+asset_id = 28
+symbol = "BATUSDT"
+base = "BAT"
+quote = "USD"
+tickers = ["BAT", "BATUSDT", "PF_BATUSD"]
+
+[assets.MKRUSDT]
+asset_id = 29
+symbol = "MKRUSDT"
+base = "MKR"
+quote = "USD"
+tickers = ["MAKER", "MKR", "MKRUSDT", "Maker", "PF_MKRUSD"]
+
+[assets.AXSUSDT]
+asset_id = 30
+symbol = "AXSUSDT"
+base = "AXS"
+quote = "USD"
+tickers = ["AXIE INFINITY", "AXS", "AXSUSDT", "Axie Infinity", "PF_AXSUSD"]
+
+[assets.GALAUSDT]
+asset_id = 31
+symbol = "GALAUSDT"
+base = "GALA"
+quote = "USD"
+tickers = ["GALA", "GALAUSDT", "Gala", "PF_GALAUSD"]
+
+[assets.ETCUSDT]
+asset_id = 32
+symbol = "ETCUSDT"
+base = "ETC"
+quote = "USD"
+tickers = ["ETC", "ETCUSDT", "ETHEREUM CLASSIC", "Ethereum Classic", "PF_ETCUSD"]
+
+[assets.KAVAUSDT]
+asset_id = 33
+symbol = "KAVAUSDT"
+base = "KAVA"
+quote = "USD"
+tickers = ["KAVA", "KAVAUSDT", "Kava", "PF_KAVAUSD"]
+
+[assets.LRCUSDT]
+asset_id = 34
+symbol = "LRCUSDT"
+base = "LRC"
+quote = "USD"
+tickers = ["LRC", "LRCUSDT", "PF_LRCUSD"]
+
+[assets.KSMUSDT]
+asset_id = 35
+symbol = "KSMUSDT"
+base = "KSM"
+quote = "USD"
+tickers = ["KSM", "KSMUSDT", "KUSAMA", "Kusama", "PF_KSMUSD"]
+
+[assets.GRTUSDT]
+asset_id = 36
+symbol = "GRTUSDT"
+base = "GRT"
+quote = "USD"
+tickers = ["GRT", "GRTUSDT", "PF_GRTUSD", "THE GRAPH", "The Graph"]
+
+[assets.FLOWUSDT]
+asset_id = 37
+symbol = "FLOWUSDT"
+base = "FLOW"
+quote = "USD"
+tickers = ["FLOW", "FLOWUSDT", "Flow", "PF_FLOWUSD"]
+
+[assets.QTUMUSDT]
+asset_id = 38
+symbol = "QTUMUSDT"
+base = "QTUM"
+quote = "USD"
+tickers = ["PF_QTUMUSD", "QTUM", "QTUMUSDT"]
+
+[assets.DASHUSDT]
+asset_id = 39
+symbol = "DASHUSDT"
+base = "DASH"
+quote = "USD"
+tickers = ["DASH", "DASHUSDT", "Dash", "PF_DASHUSD"]
+
+[assets.1INCHUSDT]
+asset_id = 40
+symbol = "1INCHUSDT"
+base = "1INCH"
+quote = "USD"
+tickers = ["1INCH", "1INCHUSDT", "1inch", "PF_1INCHUSD"]
+
+[assets.KNCUSDT]
+asset_id = 41
+symbol = "KNCUSDT"
+base = "KNC"
+quote = "USD"
+tickers = ["KNC", "KNCUSDT", "PF_KNCUSD"]
+
+[assets.OGNUSDT]
+asset_id = 42
+symbol = "OGNUSDT"
+base = "OGN"
+quote = "USD"
+tickers = ["OGN", "OGNUSDT", "PF_OGNUSD"]
+
+[assets.SUSHIUSDT]
+asset_id = 43
+symbol = "SUSHIUSDT"
+base = "SUSHI"
+quote = "USD"
+tickers = ["PF_SUSHIUSD", "SUSHI", "SUSHISWAP", "SUSHIUSDT", "SushiSwap"]
+
+[assets.STORJUSDT]
+asset_id = 44
+symbol = "STORJUSDT"
+base = "STORJ"
+quote = "USD"
+tickers = ["PF_STORJUSD", "STORJ", "STORJUSDT"]
+
+[assets.RUNEUSDT]
+asset_id = 45
+symbol = "RUNEUSDT"
+base = "RUNE"
+quote = "USD"
+tickers = ["PF_RUNEUSD", "RUNE", "RUNEUSDT", "THORCHAIN", "THORChain"]
+
+[assets.EGLDUSDT]
+asset_id = 46
+symbol = "EGLDUSDT"
+base = "EGLD"
+quote = "USD"
+tickers = ["EGLD", "EGLDUSDT", "MULTIVERSX", "MultiversX", "PF_EGLDUSD"]
+
+[assets.DYDXUSDT]
+asset_id = 47
+symbol = "DYDXUSDT"
+base = "DYDX"
+quote = "USD"
+tickers = ["DYDX", "DYDXUSDT", "PF_DYDXUSD", "dYdX"]
+
+[assets.ANKRUSDT]
+asset_id = 48
+symbol = "ANKRUSDT"
+base = "ANKR"
+quote = "USD"
+tickers = ["ANKR", "ANKRUSDT", "PF_ANKRUSD"]
+
+[assets.ICPUSDT]
+asset_id = 49
+symbol = "ICPUSDT"
+base = "ICP"
+quote = "USD"
+tickers = ["ICP", "ICPUSDT", "INTERNET COMPUTER", "Internet Computer", "PF_ICPUSD"]
+
+[assets.ETHWUSDT]
+asset_id = 50
+symbol = "ETHWUSDT"
+base = "ETHW"
+quote = "USD"
+tickers = ["ETHW", "ETHWUSDT", "PF_ETHWUSD"]
+
+[assets.BANDUSDT]
+asset_id = 51
+symbol = "BANDUSDT"
+base = "BAND"
+quote = "USD"
+tickers = ["BAND", "BANDUSDT", "PF_BANDUSD"]
+
+[assets.BALUSDT]
+asset_id = 52
+symbol = "BALUSDT"
+base = "BAL"
+quote = "USD"
+tickers = ["BAL", "BALANCER", "BALUSDT", "Balancer", "PF_BALUSD"]
+
+[assets.ALICEUSDT]
+asset_id = 53
+symbol = "ALICEUSDT"
+base = "ALICE"
+quote = "USD"
+tickers = ["ALICE", "ALICEUSDT", "PF_ALICEUSD"]
+
+[assets.ICXUSDT]
+asset_id = 54
+symbol = "ICXUSDT"
+base = "ICX"
+quote = "USD"
+tickers = ["ICX", "ICXUSDT", "PF_ICXUSD"]
+
+[assets.ENSUSDT]
+asset_id = 55
+symbol = "ENSUSDT"
+base = "ENS"
+quote = "USD"
+tickers = ["ENS", "ENSUSDT", "ETHEREUM NAME SERVICE", "Ethereum Name Service", "PF_ENSUSD"]
+
+[assets.AUDIOUSDT]
+asset_id = 56
+symbol = "AUDIOUSDT"
+base = "AUDIO"
+quote = "USD"
+tickers = ["AUDIO", "AUDIOUSDT", "PF_AUDIOUSD"]
+
+[assets.SCUSDT]
+asset_id = 57
+symbol = "SCUSDT"
+base = "SC"
+quote = "USD"
+tickers = ["PF_SCUSD", "SC", "SCUSDT"]
+
+[assets.MINAUSDT]
+asset_id = 58
+symbol = "MINAUSDT"
+base = "MINA"
+quote = "USD"
+tickers = ["MINA", "MINAUSDT", "PF_MINAUSD"]
+
+[assets.GLMRUSDT]
+asset_id = 59
+symbol = "GLMRUSDT"
+base = "GLMR"
+quote = "USD"
+tickers = ["GLMR", "GLMRUSDT", "PF_GLMRUSD"]
+
+[assets.QNTUSDT]
+asset_id = 60
+symbol = "QNTUSDT"
+base = "QNT"
+quote = "USD"
+tickers = ["PF_QNTUSD", "QNT", "QNTUSDT", "QUANT", "Quant"]
+
+[assets.IMXUSDT]
+asset_id = 61
+symbol = "IMXUSDT"
+base = "IMX"
+quote = "USD"
+tickers = ["IMMUTABLE", "IMX", "IMXUSDT", "Immutable", "PF_IMXUSD"]
+
+[assets.APTUSDT]
+asset_id = 62
+symbol = "APTUSDT"
+base = "APT"
+quote = "USD"
+tickers = ["APT", "APTOS", "APTUSDT", "Aptos", "PF_APTUSD"]
+
+[assets.FLRUSDT]
+asset_id = 63
+symbol = "FLRUSDT"
+base = "FLR"
+quote = "USD"
+tickers = ["FLR", "FLRUSDT", "PF_FLRUSD"]
+
+[assets.BLURUSDT]
+asset_id = 64
+symbol = "BLURUSDT"
+base = "BLUR"
+quote = "USD"
+tickers = ["BLUR", "BLURUSDT", "Blur", "PF_BLURUSD"]
+
+[assets.GMXUSDT]
+asset_id = 65
+symbol = "GMXUSDT"
+base = "GMX"
+quote = "USD"
+tickers = ["GMX", "GMXUSDT", "PF_GMXUSD"]
+
+[assets.MASKUSDT]
+asset_id = 66
+symbol = "MASKUSDT"
+base = "MASK"
+quote = "USD"
+tickers = ["MASK", "MASK NETWORK", "MASKUSDT", "Mask Network", "PF_MASKUSD"]
+
+[assets.LDOUSDT]
+asset_id = 67
+symbol = "LDOUSDT"
+base = "LDO"
+quote = "USD"
+tickers = ["LDO", "LDOUSDT", "LIDO", "Lido", "PF_LDOUSD"]
+
+[assets.ARBUSDT]
+asset_id = 68
+symbol = "ARBUSDT"
+base = "ARB"
+quote = "USD"
+tickers = ["ARB", "ARBITRUM", "ARBUSDT", "Arbitrum", "PF_ARBUSD"]
+
+[assets.STXUSDT]
+asset_id = 69
+symbol = "STXUSDT"
+base = "STX"
+quote = "USD"
+tickers = ["PF_STXUSD", "STX", "STXUSDT"]
+
+[assets.CVXUSDT]
+asset_id = 70
+symbol = "CVXUSDT"
+base = "CVX"
+quote = "USD"
+tickers = ["CONVEX", "CVX", "CVXUSDT", "Convex", "PF_CVXUSD"]
+
+[assets.JASMYUSDT]
+asset_id = 71
+symbol = "JASMYUSDT"
+base = "JASMY"
+quote = "USD"
+tickers = ["JASMY", "JASMYUSDT", "PF_JASMYUSD"]
+
+[assets.INJUSDT]
+asset_id = 72
+symbol = "INJUSDT"
+base = "INJ"
+quote = "USD"
+tickers = ["INJ", "INJECTIVE", "INJUSDT", "Injective", "PF_INJUSD"]
+
+[assets.RLCUSDT]
+asset_id = 73
+symbol = "RLCUSDT"
+base = "RLC"
+quote = "USD"
+tickers = ["PF_RLCUSD", "RLC", "RLCUSDT"]
+
+[assets.SUIUSDT]
+asset_id = 74
+symbol = "SUIUSDT"
+base = "SUI"
+quote = "USD"
+tickers = ["PF_SUIUSD", "SUI", "SUIUSDT", "Sui"]
+
+[assets.ARPAUSDT]
+asset_id = 75
+symbol = "ARPAUSDT"
+base = "ARPA"
+quote = "USD"
+tickers = ["ARPA", "ARPAUSDT", "PF_ARPAUSD"]
+
+[assets.ALPHAUSDT]
+asset_id = 76
+symbol = "ALPHAUSDT"
+base = "ALPHA"
+quote = "USD"
+tickers = ["ALPHA", "ALPHAUSDT", "PF_ALPHAUSD"]
+
+[assets.STGUSDT]
+asset_id = 77
+symbol = "STGUSDT"
+base = "STG"
+quote = "USD"
+tickers = ["PF_STGUSD", "STG", "STGUSDT"]
+
+[assets.HFTUSDT]
+asset_id = 78
+symbol = "HFTUSDT"
+base = "HFT"
+quote = "USD"
+tickers = ["HFT", "HFTUSDT", "PF_HFTUSD"]
+
+[assets.ACHUSDT]
+asset_id = 79
+symbol = "ACHUSDT"
+base = "ACH"
+quote = "USD"
+tickers = ["ACH", "ACHUSDT", "PF_ACHUSD"]
+
+[assets.CFXUSDT]
+asset_id = 80
+symbol = "CFXUSDT"
+base = "CFX"
+quote = "USD"
+tickers = ["CFX", "CFXUSDT", "PF_CFXUSD"]
+
+[assets.PAXGUSDT]
+asset_id = 81
+symbol = "PAXGUSDT"
+base = "PAXG"
+quote = "USD"
+tickers = ["PAXG", "PAXGUSDT", "PF_PAXGUSD"]
+
+[assets.AGLDUSDT]
+asset_id = 82
+symbol = "AGLDUSDT"
+base = "AGLD"
+quote = "USD"
+tickers = ["AGLD", "AGLDUSDT", "PF_AGLDUSD"]
+
+[assets.FXSUSDT]
+asset_id = 83
+symbol = "FXSUSDT"
+base = "FXS"
+quote = "USD"
+tickers = ["FRAX SHARE", "FXS", "FXSUSDT", "Frax Share", "PF_FXSUSD"]
+
+[assets.SEIUSDT]
+asset_id = 84
+symbol = "SEIUSDT"
+base = "SEI"
+quote = "USD"
+tickers = ["PF_SEIUSD", "SEI", "SEIUSDT", "Sei"]
+
+[assets.BNBUSDT]
+asset_id = 85
+symbol = "BNBUSDT"
+base = "BNB"
+quote = "USD"
+tickers = ["BINANCE", "BINANCE COIN", "BNB", "BNBUSDT", "Binance", "Binance Coin", "PF_BNBUSD"]
+
+[assets.PYTHUSDT]
+asset_id = 86
+symbol = "PYTHUSDT"
+base = "PYTH"
+quote = "USD"
+tickers = ["PF_PYTHUSD", "PYTH", "PYTHUSDT", "Pyth"]
+
+[assets.JTOUSDT]
+asset_id = 87
+symbol = "JTOUSDT"
+base = "JTO"
+quote = "USD"
+tickers = ["JITO", "JTO", "JTOUSDT", "Jito", "PF_JTOUSD"]
+
+[assets.KASUSDT]
+asset_id = 88
+symbol = "KASUSDT"
+base = "KAS"
+quote = "USD"
+tickers = ["KAS", "KASUSDT", "PF_KASUSD"]
+
+[assets.ORDIUSDT]
+asset_id = 89
+symbol = "ORDIUSDT"
+base = "ORDI"
+quote = "USD"
+tickers = ["ORDI", "ORDIUSDT", "PF_ORDIUSD"]
+
+[assets.LSKUSDT]
+asset_id = 90
+symbol = "LSKUSDT"
+base = "LSK"
+quote = "USD"
+tickers = ["LSK", "LSKUSDT", "PF_LSKUSD"]
+
+[assets.API3USDT]
+asset_id = 91
+symbol = "API3USDT"
+base = "API3"
+quote = "USD"
+tickers = ["API3", "API3USDT", "PF_API3USD"]
+
+[assets.JUPUSDT]
+asset_id = 92
+symbol = "JUPUSDT"
+base = "JUP"
+quote = "USD"
+tickers = ["JUP", "JUPITER", "JUPUSDT", "Jupiter", "PF_JUPUSD"]
+
+[assets.DYMUSDT]
+asset_id = 93
+symbol = "DYMUSDT"
+base = "DYM"
+quote = "USD"
+tickers = ["DYM", "DYMUSDT", "PF_DYMUSD"]
+
+[assets.STRKUSDT]
+asset_id = 94
+symbol = "STRKUSDT"
+base = "STRK"
+quote = "USD"
+tickers = ["PF_STRKUSD", "STARKNET", "STRK", "STRKUSDT", "Starknet"]
+
+[assets.SPELLUSDT]
+asset_id = 95
+symbol = "SPELLUSDT"
+base = "SPELL"
+quote = "USD"
+tickers = ["PF_SPELLUSD", "SPELL", "SPELLUSDT"]
+
+[assets.BADGERUSDT]
+asset_id = 96
+symbol = "BADGERUSDT"
+base = "BADGER"
+quote = "USD"
+tickers = ["BADGER", "BADGERUSDT", "PF_BADGERUSD"]
+
+[assets.ONDOUSDT]
+asset_id = 97
+symbol = "ONDOUSDT"
+base = "ONDO"
+quote = "USD"
+tickers = ["ONDO", "ONDOUSDT", "Ondo", "PF_ONDOUSD"]
+
+[assets.SAGAUSDT]
+asset_id = 98
+symbol = "SAGAUSDT"
+base = "SAGA"
+quote = "USD"
+tickers = ["PF_SAGAUSD", "SAGA", "SAGAUSDT"]
+
+[assets.BEAMUSDT]
+asset_id = 99
+symbol = "BEAMUSDT"
+base = "BEAM"
+quote = "USD"
+tickers = ["BEAM", "BEAMUSDT", "PF_BEAMUSD"]
+
+[assets.BOMEUSDT]
+asset_id = 100
+symbol = "BOMEUSDT"
+base = "BOME"
+quote = "USD"
+tickers = ["BOME", "BOMEUSDT", "PF_BOMEUSD"]
+
+[assets.ENAUSDT]
+asset_id = 101
+symbol = "ENAUSDT"
+base = "ENA"
+quote = "USD"
+tickers = ["ENA", "ENAUSDT", "ETHENA", "Ethena", "PF_ENAUSD"]
+
+[assets.NEOUSDT]
+asset_id = 102
+symbol = "NEOUSDT"
+base = "NEO"
+quote = "USD"
+tickers = ["NEO", "NEOUSDT", "PF_NEOUSD"]
+
+[assets.SUPERUSDT]
+asset_id = 103
+symbol = "SUPERUSDT"
+base = "SUPER"
+quote = "USD"
+tickers = ["PF_SUPERUSD", "SUPER", "SUPERUSDT"]
+
+[assets.COTIUSDT]
+asset_id = 104
+symbol = "COTIUSDT"
+base = "COTI"
+quote = "USD"
+tickers = ["COTI", "COTIUSDT", "PF_COTIUSD"]
+
+[assets.BICOUSDT]
+asset_id = 105
+symbol = "BICOUSDT"
+base = "BICO"
+quote = "USD"
+tickers = ["BICO", "BICOUSDT", "PF_BICOUSD"]
+
+[assets.ASTRUSDT]
+asset_id = 106
+symbol = "ASTRUSDT"
+base = "ASTR"
+quote = "USD"
+tickers = ["ASTR", "ASTRUSDT", "PF_ASTRUSD"]
+
+[assets.CHRUSDT]
+asset_id = 107
+symbol = "CHRUSDT"
+base = "CHR"
+quote = "USD"
+tickers = ["CHR", "CHRUSDT", "PF_CHRUSD"]
+
+[assets.ARUSDT]
+asset_id = 108
+symbol = "ARUSDT"
+base = "AR"
+quote = "USD"
+tickers = ["AR", "ARUSDT", "PF_ARUSD"]
+
+[assets.ETHFIUSDT]
+asset_id = 109
+symbol = "ETHFIUSDT"
+base = "ETHFI"
+quote = "USD"
+tickers = ["ETHFI", "ETHFIUSDT", "PF_ETHFIUSD"]
+
+[assets.POWRUSDT]
+asset_id = 110
+symbol = "POWRUSDT"
+base = "POWR"
+quote = "USD"
+tickers = ["PF_POWRUSD", "POWR", "POWRUSDT"]
+
+[assets.MOVRUSDT]
+asset_id = 111
+symbol = "MOVRUSDT"
+base = "MOVR"
+quote = "USD"
+tickers = ["MOVR", "MOVRUSDT", "PF_MOVRUSD"]
+
+[assets.ARKMUSDT]
+asset_id = 112
+symbol = "ARKMUSDT"
+base = "ARKM"
+quote = "USD"
+tickers = ["ARKM", "ARKMUSDT", "PF_ARKMUSD"]
+
+[assets.AEVOUSDT]
+asset_id = 113
+symbol = "AEVOUSDT"
+base = "AEVO"
+quote = "USD"
+tickers = ["AEVO", "AEVOUSDT", "PF_AEVOUSD"]
+
+[assets.C98USDT]
+asset_id = 114
+symbol = "C98USDT"
+base = "C98"
+quote = "USD"
+tickers = ["C98", "C98USDT", "PF_C98USD"]
+
+[assets.PERPUSDT]
+asset_id = 115
+symbol = "PERPUSDT"
+base = "PERP"
+quote = "USD"
+tickers = ["PERP", "PERPUSDT", "PF_PERPUSD"]
+
+[assets.PENDLEUSDT]
+asset_id = 116
+symbol = "PENDLEUSDT"
+base = "PENDLE"
+quote = "USD"
+tickers = ["PENDLE", "PENDLEUSDT", "PF_PENDLEUSD", "Pendle"]
+
+[assets.CTSIUSDT]
+asset_id = 117
+symbol = "CTSIUSDT"
+base = "CTSI"
+quote = "USD"
+tickers = ["CTSI", "CTSIUSDT", "PF_CTSIUSD"]
+
+[assets.ALTUSDT]
+asset_id = 118
+symbol = "ALTUSDT"
+base = "ALT"
+quote = "USD"
+tickers = ["ALT", "ALTUSDT", "PF_ALTUSD"]
+
+[assets.PIXELUSDT]
+asset_id = 119
+symbol = "PIXELUSDT"
+base = "PIXEL"
+quote = "USD"
+tickers = ["PF_PIXELUSD", "PIXEL", "PIXELUSDT"]
+
+[assets.PEOPLEUSDT]
+asset_id = 120
+symbol = "PEOPLEUSDT"
+base = "PEOPLE"
+quote = "USD"
+tickers = ["PEOPLE", "PEOPLEUSDT", "PF_PEOPLEUSD"]
+
+[assets.BRETTUSDT]
+asset_id = 121
+symbol = "BRETTUSDT"
+base = "BRETT"
+quote = "USD"
+tickers = ["BRETT", "BRETTUSDT", "PF_BRETTUSD"]
+
+[assets.POPCATUSDT]
+asset_id = 122
+symbol = "POPCATUSDT"
+base = "POPCAT"
+quote = "USD"
+tickers = ["PF_POPCATUSD", "POPCAT", "POPCATUSDT"]
+
+[assets.BNTUSDT]
+asset_id = 123
+symbol = "BNTUSDT"
+base = "BNT"
+quote = "USD"
+tickers = ["BNT", "BNTUSDT", "PF_BNTUSD"]
+
+[assets.GTCUSDT]
+asset_id = 124
+symbol = "GTCUSDT"
+base = "GTC"
+quote = "USD"
+tickers = ["GTC", "GTCUSDT", "PF_GTCUSD"]
+
+[assets.MEWUSDT]
+asset_id = 125
+symbol = "MEWUSDT"
+base = "MEW"
+quote = "USD"
+tickers = ["MEW", "MEWUSDT", "PF_MEWUSD"]
+
+[assets.BBUSDT]
+asset_id = 126
+symbol = "BBUSDT"
+base = "BB"
+quote = "USD"
+tickers = ["BB", "BBUSDT", "PF_BBUSD"]
+
+[assets.STEEMUSDT]
+asset_id = 127
+symbol = "STEEMUSDT"
+base = "STEEM"
+quote = "USD"
+tickers = ["PF_STEEMUSD", "STEEM", "STEEMUSDT"]
+
+[assets.PORTALUSDT]
+asset_id = 128
+symbol = "PORTALUSDT"
+base = "PORTAL"
+quote = "USD"
+tickers = ["PF_PORTALUSD", "PORTAL", "PORTALUSDT"]
+
+[assets.MYROUSDT]
+asset_id = 129
+symbol = "MYROUSDT"
+base = "MYRO"
+quote = "USD"
+tickers = ["MYRO", "MYROUSDT", "PF_MYROUSD"]
+
+[assets.HBARUSDT]
+asset_id = 130
+symbol = "HBARUSDT"
+base = "HBAR"
+quote = "USD"
+tickers = ["HBAR", "HBARUSDT", "HEDERA", "Hedera", "PF_HBARUSD"]
+
+[assets.BIGTIMEUSDT]
+asset_id = 131
+symbol = "BIGTIMEUSDT"
+base = "BIGTIME"
+quote = "USD"
+tickers = ["BIGTIME", "BIGTIMEUSDT", "PF_BIGTIMEUSD"]
+
+[assets.RADUSDT]
+asset_id = 132
+symbol = "RADUSDT"
+base = "RAD"
+quote = "USD"
+tickers = ["PF_RADUSD", "RAD", "RADUSDT"]
+
+[assets.NMRUSDT]
+asset_id = 133
+symbol = "NMRUSDT"
+base = "NMR"
+quote = "USD"
+tickers = ["NMR", "NMRUSDT", "PF_NMRUSD"]
+
+[assets.NOTUSDT]
+asset_id = 134
+symbol = "NOTUSDT"
+base = "NOT"
+quote = "USD"
+tickers = ["NOT", "NOTUSDT", "PF_NOTUSD"]
+
+[assets.HIGHUSDT]
+asset_id = 135
+symbol = "HIGHUSDT"
+base = "HIGH"
+quote = "USD"
+tickers = ["HIGH", "HIGHUSDT", "PF_HIGHUSD"]
+
+[assets.BAKEUSDT]
+asset_id = 136
+symbol = "BAKEUSDT"
+base = "BAKE"
+quote = "USD"
+tickers = ["BAKE", "BAKEUSDT", "PF_BAKEUSD"]
+
+[assets.DRIFTUSDT]
+asset_id = 137
+symbol = "DRIFTUSDT"
+base = "DRIFT"
+quote = "USD"
+tickers = ["DRIFT", "DRIFTUSDT", "PF_DRIFTUSD"]
+
+[assets.REZUSDT]
+asset_id = 138
+symbol = "REZUSDT"
+base = "REZ"
+quote = "USD"
+tickers = ["PF_REZUSD", "REZ", "REZUSDT"]
+
+[assets.MTLUSDT]
+asset_id = 139
+symbol = "MTLUSDT"
+base = "MTL"
+quote = "USD"
+tickers = ["MTL", "MTLUSDT", "PF_MTLUSD"]
+
+[assets.RENDERUSDT]
+asset_id = 140
+symbol = "RENDERUSDT"
+base = "RENDER"
+quote = "USD"
+tickers = ["PF_RENDERUSD", "RENDER", "RENDERUSDT", "RNDR", "Render"]
+
+[assets.OMUSDT]
+asset_id = 141
+symbol = "OMUSDT"
+base = "OM"
+quote = "USD"
+tickers = ["OM", "OMUSDT", "PF_OMUSD"]
+
+[assets.MEMEUSDT]
+asset_id = 142
+symbol = "MEMEUSDT"
+base = "MEME"
+quote = "USD"
+tickers = ["MEME", "MEMECOIN", "MEMEUSDT", "Memecoin", "PF_MEMEUSD"]
+
+[assets.AUCTIONUSDT]
+asset_id = 143
+symbol = "AUCTIONUSDT"
+base = "AUCTION"
+quote = "USD"
+tickers = ["AUCTION", "AUCTIONUSDT", "PF_AUCTIONUSD"]
+
+[assets.RAREUSDT]
+asset_id = 144
+symbol = "RAREUSDT"
+base = "RARE"
+quote = "USD"
+tickers = ["PF_RAREUSD", "RARE", "RAREUSDT"]
+
+[assets.CELRUSDT]
+asset_id = 145
+symbol = "CELRUSDT"
+base = "CELR"
+quote = "USD"
+tickers = ["CELR", "CELRUSDT", "PF_CELRUSD"]
+
+[assets.POLUSDT]
+asset_id = 146
+symbol = "POLUSDT"
+base = "POL"
+quote = "USD"
+tickers = ["PF_POLUSD", "POL", "POLUSDT"]
+
+[assets.FIDAUSDT]
+asset_id = 147
+symbol = "FIDAUSDT"
+base = "FIDA"
+quote = "USD"
+tickers = ["FIDA", "FIDAUSDT", "PF_FIDAUSD"]
+
+[assets.PRCLUSDT]
+asset_id = 148
+symbol = "PRCLUSDT"
+base = "PRCL"
+quote = "USD"
+tickers = ["PF_PRCLUSD", "PRCL", "PRCLUSDT"]
+
+[assets.RSRUSDT]
+asset_id = 149
+symbol = "RSRUSDT"
+base = "RSR"
+quote = "USD"
+tickers = ["PF_RSRUSD", "RSR", "RSRUSDT"]
+
+[assets.BANANAUSDT]
+asset_id = 150
+symbol = "BANANAUSDT"
+base = "BANANA"
+quote = "USD"
+tickers = ["BANANA", "BANANAUSDT", "PF_BANANAUSD"]
+
+[assets.EIGENUSDT]
+asset_id = 151
+symbol = "EIGENUSDT"
+base = "EIGEN"
+quote = "USD"
+tickers = ["EIGEN", "EIGENUSDT", "PF_EIGENUSD"]
+
+[assets.DOGSUSDT]
+asset_id = 152
+symbol = "DOGSUSDT"
+base = "DOGS"
+quote = "USD"
+tickers = ["DOGS", "DOGSUSDT", "PF_DOGSUSD"]
+
+[assets.ACEUSDT]
+asset_id = 153
+symbol = "ACEUSDT"
+base = "ACE"
+quote = "USD"
+tickers = ["ACE", "ACEUSDT", "PF_ACEUSD"]
+
+[assets.CELOUSDT]
+asset_id = 154
+symbol = "CELOUSDT"
+base = "CELO"
+quote = "USD"
+tickers = ["CELO", "CELOUSDT", "PF_CELOUSD"]
+
+[assets.PONKEUSDT]
+asset_id = 155
+symbol = "PONKEUSDT"
+base = "PONKE"
+quote = "USD"
+tickers = ["PF_PONKEUSD", "PONKE", "PONKEUSDT"]
+
+[assets.SUNDOGUSDT]
+asset_id = 156
+symbol = "SUNDOGUSDT"
+base = "SUNDOG"
+quote = "USD"
+tickers = ["PF_SUNDOGUSD", "SUNDOG", "SUNDOGUSDT"]
+
+[assets.CATIUSDT]
+asset_id = 157
+symbol = "CATIUSDT"
+base = "CATI"
+quote = "USD"
+tickers = ["CATI", "CATIUSDT", "PF_CATIUSD"]
+
+[assets.GLMUSDT]
+asset_id = 158
+symbol = "GLMUSDT"
+base = "GLM"
+quote = "USD"
+tickers = ["GLM", "GLMUSDT", "PF_GLMUSD"]
+
+[assets.GASUSDT]
+asset_id = 159
+symbol = "GASUSDT"
+base = "GAS"
+quote = "USD"
+tickers = ["GAS", "GASUSDT", "PF_GASUSD"]
+
+[assets.LQTYUSDT]
+asset_id = 160
+symbol = "LQTYUSDT"
+base = "LQTY"
+quote = "USD"
+tickers = ["LQTY", "LQTYUSDT", "PF_LQTYUSD"]
+
+[assets.SUNUSDT]
+asset_id = 161
+symbol = "SUNUSDT"
+base = "SUN"
+quote = "USD"
+tickers = ["PF_SUNUSD", "SUN", "SUNUSDT"]
+
+[assets.LEVERUSDT]
+asset_id = 162
+symbol = "LEVERUSDT"
+base = "LEVER"
+quote = "USD"
+tickers = ["LEVER", "LEVERUSDT", "PF_LEVERUSD"]
+
+[assets.CYBERUSDT]
+asset_id = 163
+symbol = "CYBERUSDT"
+base = "CYBER"
+quote = "USD"
+tickers = ["CYBER", "CYBERUSDT", "PF_CYBERUSD"]
+
+[assets.HMSTRUSDT]
+asset_id = 164
+symbol = "HMSTRUSDT"
+base = "HMSTR"
+quote = "USD"
+tickers = ["HMSTR", "HMSTRUSDT", "PF_HMSTRUSD"]
+
+[assets.ARKUSDT]
+asset_id = 165
+symbol = "ARKUSDT"
+base = "ARK"
+quote = "USD"
+tickers = ["ARK", "ARKUSDT", "PF_ARKUSD"]
+
+[assets.ROSEUSDT]
+asset_id = 166
+symbol = "ROSEUSDT"
+base = "ROSE"
+quote = "USD"
+tickers = ["PF_ROSEUSD", "ROSE", "ROSEUSDT"]
+
+[assets.GOATUSDT]
+asset_id = 167
+symbol = "GOATUSDT"
+base = "GOAT"
+quote = "USD"
+tickers = ["GOAT", "GOATUSDT", "PF_GOATUSD"]
+
+[assets.OXTUSDT]
+asset_id = 168
+symbol = "OXTUSDT"
+base = "OXT"
+quote = "USD"
+tickers = ["OXT", "OXTUSDT", "PF_OXTUSD"]
+
+[assets.CKBUSDT]
+asset_id = 169
+symbol = "CKBUSDT"
+base = "CKB"
+quote = "USD"
+tickers = ["CKB", "CKBUSDT", "PF_CKBUSD"]
+
+[assets.CETUSUSDT]
+asset_id = 170
+symbol = "CETUSUSDT"
+base = "CETUS"
+quote = "USD"
+tickers = ["CETUS", "CETUSUSDT", "PF_CETUSUSD"]
+
+[assets.MOODENGUSDT]
+asset_id = 171
+symbol = "MOODENGUSDT"
+base = "MOODENG"
+quote = "USD"
+tickers = ["MOODENG", "MOODENGUSDT", "PF_MOODENGUSD"]
+
+[assets.BELUSDT]
+asset_id = 172
+symbol = "BELUSDT"
+base = "BEL"
+quote = "USD"
+tickers = ["BEL", "BELUSDT", "PF_BELUSD"]
+
+[assets.MAGICUSDT]
+asset_id = 173
+symbol = "MAGICUSDT"
+base = "MAGIC"
+quote = "USD"
+tickers = ["MAGIC", "MAGICUSDT", "Magic", "PF_MAGICUSD"]
+
+[assets.SSVUSDT]
+asset_id = 174
+symbol = "SSVUSDT"
+base = "SSV"
+quote = "USD"
+tickers = ["PF_SSVUSD", "SSV", "SSV NETWORK", "SSV Network", "SSVUSDT"]
+
+[assets.METISUSDT]
+asset_id = 175
+symbol = "METISUSDT"
+base = "METIS"
+quote = "USD"
+tickers = ["METIS", "METISUSDT", "PF_METISUSD"]
+
+[assets.ATHUSDT]
+asset_id = 176
+symbol = "ATHUSDT"
+base = "ATH"
+quote = "USD"
+tickers = ["ATH", "ATHUSDT", "PF_ATHUSD"]
+
+[assets.POLYXUSDT]
+asset_id = 177
+symbol = "POLYXUSDT"
+base = "POLYX"
+quote = "USD"
+tickers = ["PF_POLYXUSD", "POLYX", "POLYXUSDT"]
+
+[assets.DEGENUSDT]
+asset_id = 178
+symbol = "DEGENUSDT"
+base = "DEGEN"
+quote = "USD"
+tickers = ["DEGEN", "DEGENUSDT", "PF_DEGENUSD"]
+
+[assets.DOGUSDT]
+asset_id = 179
+symbol = "DOGUSDT"
+base = "DOG"
+quote = "USD"
+tickers = ["DOG", "DOGUSDT", "PF_DOGUSD"]
+
+[assets.ONTUSDT]
+asset_id = 180
+symbol = "ONTUSDT"
+base = "ONT"
+quote = "USD"
+tickers = ["ONT", "ONTUSDT", "PF_ONTUSD"]
+
+[assets.ONGUSDT]
+asset_id = 181
+symbol = "ONGUSDT"
+base = "ONG"
+quote = "USD"
+tickers = ["ONG", "ONGUSDT", "PF_ONGUSD"]
+
+[assets.SCRUSDT]
+asset_id = 182
+symbol = "SCRUSDT"
+base = "SCR"
+quote = "USD"
+tickers = ["PF_SCRUSD", "SCR", "SCRUSDT"]
+
+[assets.KAIAUSDT]
+asset_id = 183
+symbol = "KAIAUSDT"
+base = "KAIA"
+quote = "USD"
+tickers = ["KAIA", "KAIAUSDT", "PF_KAIAUSD"]
+
+[assets.DEEPUSDT]
+asset_id = 184
+symbol = "DEEPUSDT"
+base = "DEEP"
+quote = "USD"
+tickers = ["DEEP", "DEEPUSDT", "PF_DEEPUSD"]
+
+[assets.GRASSUSDT]
+asset_id = 185
+symbol = "GRASSUSDT"
+base = "GRASS"
+quote = "USD"
+tickers = ["GRASS", "GRASSUSDT", "PF_GRASSUSD"]
+
+[assets.AIUSDT]
+asset_id = 186
+symbol = "AIUSDT"
+base = "AI"
+quote = "USD"
+tickers = ["AI", "AIUSDT", "PF_AIUSD"]
+
+[assets.GUSDT]
+asset_id = 187
+symbol = "GUSDT"
+base = "G"
+quote = "USD"
+tickers = ["G", "GUSDT", "PF_GUSD"]
+
+[assets.QUICKUSDT]
+asset_id = 188
+symbol = "QUICKUSDT"
+base = "QUICK"
+quote = "USD"
+tickers = ["PF_QUICKUSD", "QUICK", "QUICKUSDT"]
+
+[assets.OMNIUSDT]
+asset_id = 189
+symbol = "OMNIUSDT"
+base = "OMNI"
+quote = "USD"
+tickers = ["OMNI", "OMNIUSDT", "PF_OMNIUSD"]
+
+[assets.HOTUSDT]
+asset_id = 190
+symbol = "HOTUSDT"
+base = "HOT"
+quote = "USD"
+tickers = ["HOT", "HOTUSDT", "PF_HOTUSD"]
+
+[assets.CAKEUSDT]
+asset_id = 191
+symbol = "CAKEUSDT"
+base = "CAKE"
+quote = "USD"
+tickers = ["CAKE", "CAKEUSDT", "PF_CAKEUSD"]
+
+[assets.AKTUSDT]
+asset_id = 192
+symbol = "AKTUSDT"
+base = "AKT"
+quote = "USD"
+tickers = ["AKT", "AKTUSDT", "PF_AKTUSD"]
+
+[assets.PNUTUSDT]
+asset_id = 193
+symbol = "PNUTUSDT"
+base = "PNUT"
+quote = "USD"
+tickers = ["PF_PNUTUSD", "PNUT", "PNUTUSDT"]
+
+[assets.ACTUSDT]
+asset_id = 194
+symbol = "ACTUSDT"
+base = "ACT"
+quote = "USD"
+tickers = ["ACT", "ACTUSDT", "PF_ACTUSD"]
+
+[assets.BANUSDT]
+asset_id = 195
+symbol = "BANUSDT"
+base = "BAN"
+quote = "USD"
+tickers = ["BAN", "BANUSDT", "PF_BANUSD"]
+
+[assets.NEIROETHUSDT]
+asset_id = 196
+symbol = "NEIROETHUSDT"
+base = "NEIROETH"
+quote = "USD"
+tickers = ["NEIROETH", "NEIROETHUSDT", "PF_NEIROETHUSD"]
+
+[assets.SLERFUSDT]
+asset_id = 197
+symbol = "SLERFUSDT"
+base = "SLERF"
+quote = "USD"
+tickers = ["PF_SLERFUSD", "SLERF", "SLERFUSDT"]
+
+[assets.MORPHOUSDT]
+asset_id = 198
+symbol = "MORPHOUSDT"
+base = "MORPHO"
+quote = "USD"
+tickers = ["MORPHO", "MORPHOUSDT", "PF_MORPHOUSD"]
+
+[assets.COSUSDT]
+asset_id = 199
+symbol = "COSUSDT"
+base = "COS"
+quote = "USD"
+tickers = ["COS", "COSUSDT", "PF_COSUSD"]
+
+[assets.COWUSDT]
+asset_id = 200
+symbol = "COWUSDT"
+base = "COW"
+quote = "USD"
+tickers = ["COW", "COWUSDT", "PF_COWUSD"]
+
+[assets.FLUXUSDT]
+asset_id = 201
+symbol = "FLUXUSDT"
+base = "FLUX"
+quote = "USD"
+tickers = ["FLUX", "FLUXUSDT", "PF_FLUXUSD"]
+
+[assets.FIOUSDT]
+asset_id = 202
+symbol = "FIOUSDT"
+base = "FIO"
+quote = "USD"
+tickers = ["FIO", "FIOUSDT", "PF_FIOUSD"]
+
+[assets.DUSKUSDT]
+asset_id = 203
+symbol = "DUSKUSDT"
+base = "DUSK"
+quote = "USD"
+tickers = ["DUSK", "DUSKUSDT", "PF_DUSKUSD"]
+
+[assets.DENTUSDT]
+asset_id = 204
+symbol = "DENTUSDT"
+base = "DENT"
+quote = "USD"
+tickers = ["DENT", "DENTUSDT", "PF_DENTUSD"]
+
+[assets.BLASTUSDT]
+asset_id = 205
+symbol = "BLASTUSDT"
+base = "BLAST"
+quote = "USD"
+tickers = ["BLAST", "BLASTUSDT", "PF_BLASTUSD"]
+
+[assets.LOOKSUSDT]
+asset_id = 206
+symbol = "LOOKSUSDT"
+base = "LOOKS"
+quote = "USD"
+tickers = ["LOOKS", "LOOKSUSDT", "PF_LOOKSUSD"]
+
+[assets.FLMUSDT]
+asset_id = 207
+symbol = "FLMUSDT"
+base = "FLM"
+quote = "USD"
+tickers = ["FLM", "FLMUSDT", "PF_FLMUSD"]
+
+[assets.SLPUSDT]
+asset_id = 208
+symbol = "SLPUSDT"
+base = "SLP"
+quote = "USD"
+tickers = ["PF_SLPUSD", "SLP", "SLPUSDT"]
+
+[assets.IOTAUSDT]
+asset_id = 209
+symbol = "IOTAUSDT"
+base = "IOTA"
+quote = "USD"
+tickers = ["IOTA", "IOTAUSDT", "PF_IOTAUSD"]
+
+[assets.HIPPOUSDT]
+asset_id = 210
+symbol = "HIPPOUSDT"
+base = "HIPPO"
+quote = "USD"
+tickers = ["HIPPO", "HIPPOUSDT", "PF_HIPPOUSD"]
+
+[assets.GIGAUSDT]
+asset_id = 211
+symbol = "GIGAUSDT"
+base = "GIGA"
+quote = "USD"
+tickers = ["GIGA", "GIGAUSDT", "PF_GIGAUSD"]
+
+[assets.OLUSDT]
+asset_id = 212
+symbol = "OLUSDT"
+base = "OL"
+quote = "USD"
+tickers = ["OL", "OLUSDT", "PF_OLUSD"]
+
+[assets.IOTXUSDT]
+asset_id = 213
+symbol = "IOTXUSDT"
+base = "IOTX"
+quote = "USD"
+tickers = ["IOTX", "IOTXUSDT", "PF_IOTXUSD"]
+
+[assets.IOSTUSDT]
+asset_id = 214
+symbol = "IOSTUSDT"
+base = "IOST"
+quote = "USD"
+tickers = ["IOST", "IOSTUSDT", "PF_IOSTUSD"]
+
+[assets.HOOKUSDT]
+asset_id = 215
+symbol = "HOOKUSDT"
+base = "HOOK"
+quote = "USD"
+tickers = ["HOOK", "HOOKUSDT", "PF_HOOKUSD"]
+
+[assets.ORCAUSDT]
+asset_id = 216
+symbol = "ORCAUSDT"
+base = "ORCA"
+quote = "USD"
+tickers = ["ORCA", "ORCAUSDT", "PF_ORCAUSD"]
+
+[assets.SPXUSDT]
+asset_id = 217
+symbol = "SPXUSDT"
+base = "SPX"
+quote = "USD"
+tickers = ["PF_SPXUSD", "SPX", "SPXUSDT"]
+
+[assets.CROUSDT]
+asset_id = 218
+symbol = "CROUSDT"
+base = "CRO"
+quote = "USD"
+tickers = ["CRO", "CROUSDT", "PF_CROUSD"]
+
+[assets.PENGUUSDT]
+asset_id = 219
+symbol = "PENGUUSDT"
+base = "PENGU"
+quote = "USD"
+tickers = ["PENGU", "PENGUUSDT", "PF_PENGUUSD"]
+
+[assets.MOVEUSDT]
+asset_id = 220
+symbol = "MOVEUSDT"
+base = "MOVE"
+quote = "USD"
+tickers = ["MOVE", "MOVEUSDT", "PF_MOVEUSD"]
+
+[assets.MOCAUSDT]
+asset_id = 221
+symbol = "MOCAUSDT"
+base = "MOCA"
+quote = "USD"
+tickers = ["MOCA", "MOCAUSDT", "PF_MOCAUSD"]
+
+[assets.KOMAUSDT]
+asset_id = 222
+symbol = "KOMAUSDT"
+base = "KOMA"
+quote = "USD"
+tickers = ["KOMA", "KOMAUSDT", "PF_KOMAUSD"]
+
+[assets.MEUSDT]
+asset_id = 223
+symbol = "MEUSDT"
+base = "ME"
+quote = "USD"
+tickers = ["ME", "MEUSDT", "PF_MEUSD"]
+
+[assets.CHILLGUYUSDT]
+asset_id = 224
+symbol = "CHILLGUYUSDT"
+base = "CHILLGUY"
+quote = "USD"
+tickers = ["CHILLGUY", "CHILLGUYUSDT", "PF_CHILLGUYUSD"]
+
+[assets.SUSDT]
+asset_id = 225
+symbol = "SUSDT"
+base = "S"
+quote = "USD"
+tickers = ["PF_SUSD", "S", "SUSDT"]
+
+[assets.MELANIAUSDT]
+asset_id = 226
+symbol = "MELANIAUSDT"
+base = "MELANIA"
+quote = "USD"
+tickers = ["MELANIA", "MELANIAUSDT", "Melania", "PF_MELANIAUSD"]
+
+[assets.FARTCOINUSDT]
+asset_id = 227
+symbol = "FARTCOINUSDT"
+base = "FARTCOIN"
+quote = "USD"
+tickers = ["FARTCOIN", "FARTCOINUSDT", "PF_FARTCOINUSD"]
+
+[assets.AI16ZUSDT]
+asset_id = 228
+symbol = "AI16ZUSDT"
+base = "AI16Z"
+quote = "USD"
+tickers = ["AI16Z", "AI16ZUSDT", "PF_AI16ZUSD"]
+
+[assets.AIXBTUSDT]
+asset_id = 229
+symbol = "AIXBTUSDT"
+base = "AIXBT"
+quote = "USD"
+tickers = ["AIXBT", "AIXBTUSDT", "PF_AIXBTUSD"]
+
+[assets.LUMIAUSDT]
+asset_id = 230
+symbol = "LUMIAUSDT"
+base = "LUMIA"
+quote = "USD"
+tickers = ["LUMIA", "LUMIAUSDT", "PF_LUMIAUSD"]
+
+[assets.MAJORUSDT]
+asset_id = 231
+symbol = "MAJORUSDT"
+base = "MAJOR"
+quote = "USD"
+tickers = ["MAJOR", "MAJORUSDT", "PF_MAJORUSD"]
+
+[assets.GRIFFAINUSDT]
+asset_id = 232
+symbol = "GRIFFAINUSDT"
+base = "GRIFFAIN"
+quote = "USD"
+tickers = ["GRIFFAIN", "GRIFFAINUSDT", "PF_GRIFFAINUSD"]
+
+[assets.ANIMEUSDT]
+asset_id = 233
+symbol = "ANIMEUSDT"
+base = "ANIME"
+quote = "USD"
+tickers = ["ANIME", "ANIMEUSDT", "PF_ANIMEUSD"]
+
+[assets.HYPEUSDT]
+asset_id = 234
+symbol = "HYPEUSDT"
+base = "HYPE"
+quote = "USD"
+tickers = ["HYPE", "HYPEUSDT", "PF_HYPEUSD"]
+
+[assets.IOUSDT]
+asset_id = 235
+symbol = "IOUSDT"
+base = "IO"
+quote = "USD"
+tickers = ["IO", "IOUSDT", "PF_IOUSD"]
+
+[assets.HIVEUSDT]
+asset_id = 236
+symbol = "HIVEUSDT"
+base = "HIVE"
+quote = "USD"
+tickers = ["HIVE", "HIVEUSDT", "PF_HIVEUSD"]
+
+[assets.ALCHUSDT]
+asset_id = 237
+symbol = "ALCHUSDT"
+base = "ALCH"
+quote = "USD"
+tickers = ["ALCH", "ALCHUSDT", "PF_ALCHUSD"]
+
+[assets.ARCUSDT]
+asset_id = 238
+symbol = "ARCUSDT"
+base = "ARC"
+quote = "USD"
+tickers = ["ARC", "ARCUSDT", "PF_ARCUSD"]
+
+[assets.CGPTUSDT]
+asset_id = 239
+symbol = "CGPTUSDT"
+base = "CGPT"
+quote = "USD"
+tickers = ["CGPT", "CGPTUSDT", "PF_CGPTUSD"]
+
+[assets.SONICUSDT]
+asset_id = 240
+symbol = "SONICUSDT"
+base = "SONIC"
+quote = "USD"
+tickers = ["PF_SONICUSD", "SONIC", "SONICUSDT"]
+
+[assets.SKLUSDT]
+asset_id = 241
+symbol = "SKLUSDT"
+base = "SKL"
+quote = "USD"
+tickers = ["PF_SKLUSD", "SKL", "SKLUSDT"]
+
+[assets.BIOUSDT]
+asset_id = 242
+symbol = "BIOUSDT"
+base = "BIO"
+quote = "USD"
+tickers = ["BIO", "BIOUSDT", "PF_BIOUSD"]
+
+[assets.COOKIEUSDT]
+asset_id = 243
+symbol = "COOKIEUSDT"
+base = "COOKIE"
+quote = "USD"
+tickers = ["COOKIE", "COOKIEUSDT", "PF_COOKIEUSD"]
+
+[assets.DEXEUSDT]
+asset_id = 244
+symbol = "DEXEUSDT"
+base = "DEXE"
+quote = "USD"
+tickers = ["DEXE", "DEXEUSDT", "PF_DEXEUSD"]
+
+[assets.ONEUSDT]
+asset_id = 245
+symbol = "ONEUSDT"
+base = "ONE"
+quote = "USD"
+tickers = ["ONE", "ONEUSDT", "PF_ONEUSD"]
+
+[assets.SWARMSUSDT]
+asset_id = 246
+symbol = "SWARMSUSDT"
+base = "SWARMS"
+quote = "USD"
+tickers = ["PF_SWARMSUSD", "SWARMS", "SWARMSUSDT"]
+
+[assets.BERAUSDT]
+asset_id = 247
+symbol = "BERAUSDT"
+base = "BERA"
+quote = "USD"
+tickers = ["BERA", "BERAUSDT", "PF_BERAUSD"]
+
+[assets.DUCKUSDT]
+asset_id = 248
+symbol = "DUCKUSDT"
+base = "DUCK"
+quote = "USD"
+tickers = ["DUCK", "DUCKUSDT", "PF_DUCKUSD"]
+
+[assets.SOLVUSDT]
+asset_id = 249
+symbol = "SOLVUSDT"
+base = "SOLV"
+quote = "USD"
+tickers = ["PF_SOLVUSD", "SOLV", "SOLVUSDT"]
+
+[assets.NCUSDT]
+asset_id = 250
+symbol = "NCUSDT"
+base = "NC"
+quote = "USD"
+tickers = ["NC", "NCUSDT", "PF_NCUSD"]
+
+[assets.IDUSDT]
+asset_id = 251
+symbol = "IDUSDT"
+base = "ID"
+quote = "USD"
+tickers = ["ID", "IDUSDT", "PF_IDUSD"]
+
+[assets.PIPPINUSDT]
+asset_id = 252
+symbol = "PIPPINUSDT"
+base = "PIPPIN"
+quote = "USD"
+tickers = ["PF_PIPPINUSD", "PIPPIN", "PIPPINUSDT"]
+
+[assets.IPUSDT]
+asset_id = 253
+symbol = "IPUSDT"
+base = "IP"
+quote = "USD"
+tickers = ["IP", "IPUSDT", "PF_IPUSD"]
+
+[assets.KAITOUSDT]
+asset_id = 254
+symbol = "KAITOUSDT"
+base = "KAITO"
+quote = "USD"
+tickers = ["KAITO", "KAITOUSDT", "PF_KAITOUSD"]
+
+[assets.GPSUSDT]
+asset_id = 255
+symbol = "GPSUSDT"
+base = "GPS"
+quote = "USD"
+tickers = ["GPS", "GPSUSDT", "PF_GPSUSD"]
+
+[assets.SHELLUSDT]
+asset_id = 256
+symbol = "SHELLUSDT"
+base = "SHELL"
+quote = "USD"
+tickers = ["PF_SHELLUSD", "SHELL", "SHELLUSDT"]
+
+[assets.B3USDT]
+asset_id = 257
+symbol = "B3USDT"
+base = "B3"
+quote = "USD"
+tickers = ["B3", "B3USDT", "PF_B3USD"]
+
+[assets.INITUSDT]
+asset_id = 258
+symbol = "INITUSDT"
+base = "INIT"
+quote = "USD"
+tickers = ["INIT", "INITUSDT", "PF_INITUSD"]
+
+[assets.MUBARAKUSDT]
+asset_id = 259
+symbol = "MUBARAKUSDT"
+base = "MUBARAK"
+quote = "USD"
+tickers = ["MUBARAK", "MUBARAKUSDT", "PF_MUBARAKUSD"]
+
+[assets.HAEDALUSDT]
+asset_id = 260
+symbol = "HAEDALUSDT"
+base = "HAEDAL"
+quote = "USD"
+tickers = ["HAEDAL", "HAEDALUSDT", "PF_HAEDALUSD"]
+
+[assets.MNTUSDT]
+asset_id = 261
+symbol = "MNTUSDT"
+base = "MNT"
+quote = "USD"
+tickers = ["MNT", "MNTUSDT", "PF_MNTUSD"]
+
+[assets.PROVEUSDT]
+asset_id = 262
+symbol = "PROVEUSDT"
+base = "PROVE"
+quote = "USD"
+tickers = ["PF_PROVEUSD", "PROVE", "PROVEUSDT"]
+
+[assets.CTCUSDT]
+asset_id = 263
+symbol = "CTCUSDT"
+base = "CTC"
+quote = "USD"
+tickers = ["CTC", "CTCUSDT", "PF_CTCUSD"]
+
+[assets.0GUSDT]
+asset_id = 264
+symbol = "0GUSDT"
+base = "0G"
+quote = "USD"
+tickers = ["0G", "0GUSDT", "PF_0GUSD"]
+
+[assets.AVNTUSDT]
+asset_id = 265
+symbol = "AVNTUSDT"
+base = "AVNT"
+quote = "USD"
+tickers = ["AVNT", "AVNTUSDT", "PF_AVNTUSD"]
+
+[assets.LINEAUSDT]
+asset_id = 266
+symbol = "LINEAUSDT"
+base = "LINEA"
+quote = "USD"
+tickers = ["LINEA", "LINEAUSDT", "PF_LINEAUSD"]
+
+[assets.QUSDT]
+asset_id = 267
+symbol = "QUSDT"
+base = "Q"
+quote = "USD"
+tickers = ["PF_QUSD", "Q", "QUSDT"]
+
+[assets.MYXUSDT]
+asset_id = 268
+symbol = "MYXUSDT"
+base = "MYX"
+quote = "USD"
+tickers = ["MYX", "MYXUSDT", "PF_MYXUSD"]
+
+[assets.ASTERUSDT]
+asset_id = 269
+symbol = "ASTERUSDT"
+base = "ASTER"
+quote = "USD"
+tickers = ["ASTER", "ASTERUSDT", "PF_ASTERUSD"]
+
+[assets.B2USDT]
+asset_id = 270
+symbol = "B2USDT"
+base = "B2"
+quote = "USD"
+tickers = ["B2", "B2USDT", "PF_B2USD"]
+
+[assets.HUSDT]
+asset_id = 271
+symbol = "HUSDT"
+base = "H"
+quote = "USD"
+tickers = ["H", "HUSDT", "PF_HUSD"]
+
+[assets.MUSDT]
+asset_id = 272
+symbol = "MUSDT"
+base = "M"
+quote = "USD"
+tickers = ["M", "MUSDT", "PF_MUSD"]
+
+[assets.ORDERUSDT]
+asset_id = 273
+symbol = "ORDERUSDT"
+base = "ORDER"
+quote = "USD"
+tickers = ["ORDER", "ORDERUSDT", "PF_ORDERUSD"]
+
+[assets.PROMPTUSDT]
+asset_id = 274
+symbol = "PROMPTUSDT"
+base = "PROMPT"
+quote = "USD"
+tickers = ["PF_PROMPTUSD", "PROMPT", "PROMPTUSDT"]
+
+[assets.PTBUSDT]
+asset_id = 275
+symbol = "PTBUSDT"
+base = "PTB"
+quote = "USD"
+tickers = ["PF_PTBUSD", "PTB", "PTBUSDT"]
+
+[assets.MIRAUSDT]
+asset_id = 276
+symbol = "MIRAUSDT"
+base = "MIRA"
+quote = "USD"
+tickers = ["MIRA", "MIRAUSDT", "PF_MIRAUSD"]
+
+[assets.2ZUSDT]
+asset_id = 277
+symbol = "2ZUSDT"
+base = "2Z"
+quote = "USD"
+tickers = ["2Z", "2ZUSDT", "PF_2ZUSD"]
+
+[assets.BLESSUSDT]
+asset_id = 278
+symbol = "BLESSUSDT"
+base = "BLESS"
+quote = "USD"
+tickers = ["BLESS", "BLESSUSDT", "PF_BLESSUSD"]
+
+[assets.EDENUSDT]
+asset_id = 279
+symbol = "EDENUSDT"
+base = "EDEN"
+quote = "USD"
+tickers = ["EDEN", "EDENUSDT", "PF_EDENUSD"]
+
+[assets.OPENUSDT]
+asset_id = 280
+symbol = "OPENUSDT"
+base = "OPEN"
+quote = "USD"
+tickers = ["OPEN", "OPENUSDT", "PF_OPENUSD"]
+
+[assets.FFUSDT]
+asset_id = 281
+symbol = "FFUSDT"
+base = "FF"
+quote = "USD"
+tickers = ["FF", "FFUSDT", "PF_FFUSD"]
+
+[assets.BARDUSDT]
+asset_id = 282
+symbol = "BARDUSDT"
+base = "BARD"
+quote = "USD"
+tickers = ["BARD", "BARDUSDT", "PF_BARDUSD"]
+
+[assets.METUSDT]
+asset_id = 283
+symbol = "METUSDT"
+base = "MET"
+quote = "USD"
+tickers = ["MET", "METUSDT", "PF_METUSD"]
+
+[assets.RIVERUSDT]
+asset_id = 284
+symbol = "RIVERUSDT"
+base = "RIVER"
+quote = "USD"
+tickers = ["PF_RIVERUSD", "RIVER", "RIVERUSDT"]
+
+[assets.ENSOUSDT]
+asset_id = 285
+symbol = "ENSOUSDT"
+base = "ENSO"
+quote = "USD"
+tickers = ["ENSO", "ENSOUSDT", "PF_ENSOUSD"]
+
+[assets.TRUMP]
+asset_id = 666
+symbol = "TRUMP"
+base = "TRUMP"
+quote = "USD"
+tickers = ["OFFICIAL TRUMP", "Official Trump", "PF_TRUMPUSD", "TRUMP", "Trump"]

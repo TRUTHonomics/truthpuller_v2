@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truthpuller v2 - Cluster Review</title>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-green: #238636;
+            --accent-red: #da3633;
+            --accent-blue: #58a6ff;
+            --accent-yellow: #d29922;
+            --accent-purple: #8957e5;
+            --accent-orange: #f0883e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        header h1::before {
+            content: '📊';
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        
+        .stat-card.pending .value { color: var(--accent-yellow); }
+        .stat-card.validated .value { color: var(--accent-green); }
+        .stat-card.need-review .value { color: var(--accent-red); }
+        .stat-card.phase1 .value { color: var(--accent-orange); }
+        .stat-card.phase2 .value { color: var(--accent-purple); }
+        
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .section {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        tr:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .impact-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .impact-badge.positive {
+            background: rgba(35, 134, 54, 0.2);
+            color: #3fb950;
+        }
+        
+        .impact-badge.negative {
+            background: rgba(218, 54, 51, 0.2);
+            color: #f85149;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        
+        .status-badge.pending {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--accent-yellow);
+        }
+        
+        .status-badge.llm_analyzed {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--accent-blue);
+        }
+        
+        .status-badge.validated {
+            background: rgba(35, 134, 54, 0.2);
+            color: var(--accent-green);
+        }
+        
+        .status-badge.phase1_done {
+            background: rgba(240, 136, 62, 0.2);
+            color: var(--accent-orange);
+        }
+        
+        .status-badge.phase2_done {
+            background: rgba(137, 87, 229, 0.2);
+            color: var(--accent-purple);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2ea043;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: #30363d;
+        }
+        
+        .confidence-bar {
+            width: 60px;
+            height: 6px;
+            background: var(--bg-tertiary);
+            border-radius: 3px;
+            overflow: hidden;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 0.5rem;
+        }
+        
+        .confidence-bar .fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+        
+        .confidence-bar .fill.high { background: var(--accent-green); }
+        .confidence-bar .fill.medium { background: var(--accent-yellow); }
+        .confidence-bar .fill.low { background: var(--accent-red); }
+        
+        .timestamp {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+        
+        .empty-state::before {
+            content: '✓';
+            display: block;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-green);
+        }
+        
+        .recent-list {
+            list-style: none;
+        }
+        
+        .recent-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .recent-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .recent-content {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 400px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Priority badge styles */
+        .priority-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .priority-badge.urgent {
+            background: rgba(218, 54, 51, 0.2);
+            color: #f85149;
+        }
+        
+        .priority-badge.high {
+            background: rgba(240, 136, 62, 0.2);
+            color: var(--accent-orange);
+        }
+        
+        .priority-badge.medium {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--accent-yellow);
+        }
+        
+        .priority-badge.low {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--accent-blue);
+        }
+        
+        .review-reason {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .mechanism-badge {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-left: 0.25rem;
+        }
+        
+        .mechanism-badge.A {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--accent-blue);
+        }
+        
+        .mechanism-badge.B {
+            background: rgba(218, 54, 51, 0.3);
+            color: #f85149;
+        }
+        
+        .mechanism-badge.C {
+            background: rgba(139, 148, 158, 0.2);
+            color: var(--text-secondary);
+        }
+        
+        .score-spread {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+        
+        .spread-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 0.25rem;
+        }
+        
+        .spread-indicator.close { background: var(--accent-red); }
+        .spread-indicator.medium { background: var(--accent-yellow); }
+        .spread-indicator.clear { background: var(--accent-green); }
+        
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+        
+        .tab {
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            background: transparent;
+            border: 1px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .tab:hover {
+            color: var(--text-primary);
+            background: var(--bg-tertiary);
+        }
+        
+        .tab.active {
+            color: var(--accent-blue);
+            background: rgba(88, 166, 255, 0.1);
+            border-color: var(--accent-blue);
+        }
+        
+        .tab .count {
+            background: var(--bg-tertiary);
+            padding: 0.1rem 0.4rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-left: 0.25rem;
+        }
+        
+        .tab-content {
+            margin-top: 1rem;
+        }
+        
+        .sortable {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            padding-right: 1.5rem;
+        }
+        
+        .sortable:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .sort-indicator {
+            position: absolute;
+            right: 0.5rem;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        .sort-indicator.asc::after {
+            content: ' ↑';
+            color: var(--accent-blue);
+        }
+        
+        .sort-indicator.desc::after {
+            content: ' ↓';
+            color: var(--accent-blue);
+        }
+    </style>
+    <script>
+        let currentSort = { column: null, direction: null };
+        
+        function showTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).style.display = 'block';
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+        
+        function togglePriorityFilter() {
+            const checkbox = document.getElementById('priority-only-checkbox');
+            const priorityOnly = checkbox.checked ? 'true' : 'false';
+            window.location.href = `/?priority_only=${priorityOnly}`;
+        }
+        
+        function applyFilters() {
+            const filter = document.getElementById('sigma-filter').value;
+            const table = document.querySelector('#to-review table tbody');
+            if (!table) return;
+            
+            const rows = Array.from(table.querySelectorAll('tr'));
+            const filterInfo = document.getElementById('filter-info');
+            let visibleCount = 0;
+            
+            rows.forEach(row => {
+                const sigmaCell = row.querySelector('td[data-sigma]');
+                if (!sigmaCell) {
+                    row.style.display = 'none';
+                    return;
+                }
+                
+                const sigma = parseFloat(sigmaCell.getAttribute('data-sigma') || 0);
+                let show = true;
+                
+                if (filter === 'positive' && sigma <= 0) {
+                    show = false;
+                } else if (filter === 'negative' && sigma >= 0) {
+                    show = false;
+                }
+                
+                if (show) {
+                    row.style.display = '';
+                    visibleCount++;
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+            
+            if (filterInfo) {
+                filterInfo.textContent = `Showing ${visibleCount} clusters`;
+            }
+        }
+        
+        function sortTable(column) {
+            const table = document.querySelector('#to-review table tbody');
+            if (!table) return;
+            
+            // Get only visible rows
+            const rows = Array.from(table.querySelectorAll('tr')).filter(row => row.style.display !== 'none');
+            
+            // Determine sort direction
+            let direction = 'asc';
+            if (currentSort.column === column && currentSort.direction === 'asc') {
+                direction = 'desc';
+            }
+            
+            // Update sort state
+            currentSort = { column, direction };
+            
+            // Update sort indicators
+            document.querySelectorAll('#to-review .sort-indicator').forEach(ind => {
+                ind.className = 'sort-indicator';
+            });
+            const indicator = document.getElementById(`sort-${column}-indicator`);
+            if (indicator) {
+                indicator.className = `sort-indicator ${direction}`;
+            }
+            
+            // Sort rows
+            rows.sort((a, b) => {
+                let aVal, bVal;
+                
+                if (column === 'sigma') {
+                    aVal = parseFloat(a.querySelector('td[data-sigma]')?.getAttribute('data-sigma') || 0);
+                    bVal = parseFloat(b.querySelector('td[data-sigma]')?.getAttribute('data-sigma') || 0);
+                    
+                    // Sorteer op absolute waarde (hoog -> laag of andersom)
+                    if (direction === 'asc') {
+                        return aVal - bVal;
+                    } else {
+                        return bVal - aVal;
+                    }
+                } else {
+                    return 0; // No sorting for other columns yet
+                }
+            });
+            
+            // Re-append sorted rows (only visible ones)
+            rows.forEach(row => table.appendChild(row));
+            
+            // Update filter count after sorting
+            const visibleRows = Array.from(table.querySelectorAll('tr')).filter(row => row.style.display !== 'none');
+            const filterInfo = document.getElementById('filter-info');
+            if (filterInfo) {
+                filterInfo.textContent = `Showing ${visibleRows.length} clusters`;
+            }
+        }
+        
+        let currentSortValidated = { column: null, direction: null };
+        
+        function sortTableValidated(column) {
+            const table = document.querySelector('#validated table tbody');
+            if (!table) return;
+            
+            const rows = Array.from(table.querySelectorAll('tr'));
+            
+            // Determine sort direction
+            let direction = 'asc';
+            if (currentSortValidated.column === column && currentSortValidated.direction === 'asc') {
+                direction = 'desc';
+            }
+            
+            // Update sort state
+            currentSortValidated = { column, direction };
+            
+            // Update sort indicators
+            document.querySelectorAll('#validated .sort-indicator').forEach(ind => {
+                ind.className = 'sort-indicator';
+            });
+            const indicator = document.getElementById(`sort-validated-${column}-indicator`);
+            if (indicator) {
+                indicator.className = `sort-indicator ${direction}`;
+            }
+            
+            // Sort rows
+            rows.sort((a, b) => {
+                let aVal, bVal;
+                
+                if (column === 'sigma') {
+                    aVal = parseFloat(a.querySelector('td[data-sigma]')?.getAttribute('data-sigma') || 0);
+                    bVal = parseFloat(b.querySelector('td[data-sigma]')?.getAttribute('data-sigma') || 0);
+                    
+                    // Sorteer op waarde (hoog -> laag of andersom)
+                    if (direction === 'asc') {
+                        return aVal - bVal;
+                    } else {
+                        return bVal - aVal;
+                    }
+                } else {
+                    return 0;
+                }
+            });
+            
+            // Re-append sorted rows
+            rows.forEach(row => table.appendChild(row));
+        }
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update initial filter count
+            const table = document.querySelector('#to-review table tbody');
+            if (table) {
+                const visibleRows = Array.from(table.querySelectorAll('tr')).filter(row => row.style.display !== 'none');
+                const filterInfo = document.getElementById('filter-info');
+                if (filterInfo) {
+                    filterInfo.textContent = `Showing ${visibleRows.length} clusters`;
+                }
+            }
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Truthpuller v2 - Cluster Review</h1>
+    </header>
+    
+    <div class="container">
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="value">{{ stats.total_clusters }}</div>
+                <div class="label">Total Clusters</div>
+            </div>
+            <div class="stat-card pending">
+                <div class="value">{{ stats.pending }}</div>
+                <div class="label">Pending Analysis</div>
+            </div>
+            <div class="stat-card phase1">
+                <div class="value">{{ stats.phase1_analyzed }}</div>
+                <div class="label">Phase 1 Done</div>
+            </div>
+            <div class="stat-card phase2">
+                <div class="value">{{ stats.llm_analyzed }}</div>
+                <div class="label">Phase 2 Done</div>
+            </div>
+            <div class="stat-card validated">
+                <div class="value">{{ stats.validated }}</div>
+                <div class="label">Validated</div>
+            </div>
+            <div class="stat-card need-review">
+                <div class="value">{{ stats.needs_review }}</div>
+                <div class="label">Needs Review</div>
+            </div>
+        </div>
+        
+        <!-- Clusters to Review / Validated -->
+        <div class="section">
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('to-review')">
+                    To Review
+                    <span class="count">{{ clusters|length }}</span>
+                </button>
+                <button class="tab" onclick="showTab('validated')">
+                    Validated
+                    <span class="count">{{ validated_clusters|length }}</span>
+                </button>
+            </div>
+            
+            <!-- To Review Tab -->
+            <div id="to-review" class="tab-content">
+                <div style="display: flex; gap: 2rem; align-items: center; margin-bottom: 1rem; padding: 1rem; background: var(--bg-tertiary); border-radius: 6px;">
+                    <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                        <input type="checkbox" id="priority-only-checkbox" {% if priority_only %}checked{% endif %} onchange="togglePriorityFilter()" style="width: 1.2rem; height: 1.2rem; cursor: pointer;">
+                        <span style="font-size: 0.9rem; color: var(--text-primary);">Prioritize on uncertainty</span>
+                    </label>
+                    
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 0.9rem; color: var(--text-secondary);">Filter Sigma:</span>
+                        <select id="sigma-filter" onchange="applyFilters()" style="padding: 0.4rem 0.8rem; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-primary); font-size: 0.9rem; cursor: pointer;">
+                            <option value="all">All</option>
+                            <option value="positive">Positive only</option>
+                            <option value="negative">Negative only</option>
+                        </select>
+                    </div>
+                    
+                    <div id="filter-info" style="font-size: 0.85rem; color: var(--text-secondary);">
+                        Showing {{ clusters|length }} clusters
+                    </div>
+                </div>
+                
+                <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">
+                    {% if priority_only %}
+                    Sorted by review priority. Higher priority = more uncertain LLM analysis, needs human attention.
+                    {% else %}
+                    Showing all clusters. Use filters and sorting to find what you need.
+                    {% endif %}
+                </p>
+                
+                {% if clusters %}
+                <table>
+                <thead>
+                    <tr>
+                        <th>Priority</th>
+                        <th>ID</th>
+                        <th>Interval</th>
+                        <th>Time</th>
+                        <th>Posts</th>
+                        <th class="sortable" data-sort="sigma" onclick="sortTable('sigma')">
+                            Sigma
+                            <span class="sort-indicator" id="sort-sigma-indicator">↕</span>
+                        </th>
+                        <th>Status</th>
+                        <th>Mechanism</th>
+                        <th>Confidence</th>
+                        <th>Spread</th>
+                        <th>Reason</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cluster in clusters %}
+                    <tr>
+                        <td>
+                            {% if cluster.review_priority %}
+                                {% if cluster.review_priority >= 80 %}
+                                <span class="priority-badge urgent">🔴 {{ cluster.review_priority }}</span>
+                                {% elif cluster.review_priority >= 60 %}
+                                <span class="priority-badge high">🟠 {{ cluster.review_priority }}</span>
+                                {% elif cluster.review_priority >= 40 %}
+                                <span class="priority-badge medium">🟡 {{ cluster.review_priority }}</span>
+                                {% else %}
+                                <span class="priority-badge low">🔵 {{ cluster.review_priority }}</span>
+                                {% endif %}
+                            {% else %}
+                            <span class="priority-badge low">-</span>
+                            {% endif %}
+                        </td>
+                        <td>#{{ cluster.cluster_id }}</td>
+                        <td>{{ cluster.interval }}</td>
+                        <td class="timestamp">
+                            {% if cluster.trigger_kline_time %}
+                            {{ cluster.trigger_kline_time.strftime('%Y-%m-%d %H:%M') }}
+                            {% elif cluster.first_post_time %}
+                            {{ cluster.first_post_time.strftime('%Y-%m-%d %H:%M') }}
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>{{ cluster.post_count }}</td>
+                        <td data-sigma="{{ cluster.trigger_sigma or 0 }}">
+                            {% if cluster.trigger_sigma %}
+                            <span style="color: {{ '#3fb950' if cluster.trigger_return_pct and cluster.trigger_return_pct > 0 else '#f85149' }}">
+                                {{ '%.2f'|format(cluster.trigger_sigma) }}σ
+                            </span>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <span class="status-badge {{ cluster.status }}">{{ cluster.status }}</span>
+                        </td>
+                        <td>
+                            {% if cluster.llm_mechanism %}
+                            <span class="mechanism-badge {{ cluster.llm_mechanism }}">{{ cluster.llm_mechanism }}</span>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if cluster.llm_confidence %}
+                            {{ '%.0f'|format(cluster.llm_confidence * 100) }}%
+                            <div class="confidence-bar">
+                                <div class="fill {% if cluster.llm_confidence >= 0.7 %}high{% elif cluster.llm_confidence >= 0.4 %}medium{% else %}low{% endif %}" 
+                                     style="width: {{ cluster.llm_confidence * 100 }}%"></div>
+                            </div>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if cluster.score_spread is not none %}
+                            <span class="spread-indicator {% if cluster.score_spread < 0.1 %}close{% elif cluster.score_spread < 0.3 %}medium{% else %}clear{% endif %}"></span>
+                            <span class="score-spread">{{ '%.2f'|format(cluster.score_spread) }}</span>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if cluster.review_reason %}
+                            <span class="review-reason" title="{{ cluster.review_reason }}">{{ cluster.review_reason }}</span>
+                            {% else %}
+                            -
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="/cluster/{{ cluster.cluster_id }}" class="btn btn-primary">Review</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                {% else %}
+                <div class="empty-state">
+                    <p>All clusters have been reviewed!</p>
+                </div>
+                {% endif %}
+            </div>
+            
+            <!-- Validated Tab -->
+            <div id="validated" class="tab-content" style="display: none;">
+                <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">
+                    Previously validated clusters. Click to review or revise.
+                </p>
+                
+                {% if validated_clusters %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Interval</th>
+                            <th>Time</th>
+                            <th>Posts</th>
+                            <th class="sortable" data-sort="sigma" onclick="sortTableValidated('sigma')">
+                                Sigma
+                                <span class="sort-indicator" id="sort-validated-sigma-indicator">↕</span>
+                            </th>
+                            <th>Validated At</th>
+                            <th>Mechanism</th>
+                            <th>Validated Post</th>
+                            <th>Notes</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cluster in validated_clusters %}
+                        <tr>
+                            <td>#{{ cluster.cluster_id }}</td>
+                            <td>{{ cluster.interval }}</td>
+                            <td class="timestamp">
+                                {% if cluster.first_post_time %}
+                                {{ cluster.first_post_time.strftime('%Y-%m-%d %H:%M') }}
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>{{ cluster.post_count }}</td>
+                            <td data-sigma="{{ cluster.trigger_sigma or 0 }}">
+                                {% if cluster.trigger_sigma %}
+                                <span style="color: {{ '#3fb950' if cluster.trigger_return_pct and cluster.trigger_return_pct > 0 else '#f85149' }}">
+                                    {{ '%.2f'|format(cluster.trigger_sigma) }}σ
+                                </span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td class="timestamp">
+                                {{ cluster.validated_at.strftime('%Y-%m-%d %H:%M') if cluster.validated_at else '-' }}
+                            </td>
+                            <td>
+                                {% if cluster.llm_mechanism %}
+                                <span class="mechanism-badge {{ cluster.llm_mechanism }}">{{ cluster.llm_mechanism }}</span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if cluster.validated_content %}
+                                <span style="max-width: 200px; display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                    {{ cluster.validated_content[:60] }}...
+                                </span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if cluster.review_notes %}
+                                <span style="max-width: 150px; display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.85rem; color: var(--text-secondary);" title="{{ cluster.review_notes }}">
+                                    {{ cluster.review_notes[:40] }}...
+                                </span>
+                                {% else %}
+                                -
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="/cluster/{{ cluster.cluster_id }}" class="btn btn-secondary">Review</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">
+                    <p>No validated clusters yet.</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- Recently Validated (Summary) -->
+        {% if recent_validated %}
+        <div class="section">
+            <h2>Recently Validated (Last 10)</h2>
+            <ul class="recent-list">
+                {% for item in recent_validated %}
+                <li>
+                    <div>
+                        <strong>#{{ item.cluster_id }}</strong>
+                        <span class="timestamp">{{ item.validated_at.strftime('%Y-%m-%d %H:%M') if item.validated_at else '' }}</span>
+                        {% if item.trigger_sigma %}
+                        <span style="margin-left: 0.5rem; color: {{ '#3fb950' if item.trigger_return_pct and item.trigger_return_pct > 0 else '#f85149' }}">
+                            {{ '%.2f'|format(item.trigger_sigma) }}σ
+                        </span>
+                        {% endif %}
+                    </div>
+                    <div class="recent-content">
+                        {{ item.validated_content[:80] if item.validated_content else 'No content' }}...
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

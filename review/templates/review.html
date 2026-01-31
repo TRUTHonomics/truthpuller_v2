@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Cluster #{{ cluster.cluster_id }} - Truthpuller v2</title>
+    <script src="https://unpkg.com/lightweight-charts@4.1.0/dist/lightweight-charts.standalone.production.js"></script>
+    <style>
+        :root {
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --border-color: #30363d;
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-green: #238636;
+            --accent-red: #da3633;
+            --accent-blue: #58a6ff;
+            --accent-yellow: #d29922;
+            --accent-purple: #8957e5;
+            --accent-orange: #f0883e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .header-meta {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .impact-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+        
+        .impact-badge.positive {
+            background: rgba(35, 134, 54, 0.2);
+            color: #3fb950;
+        }
+        
+        .impact-badge.negative {
+            background: rgba(218, 54, 51, 0.2);
+            color: #f85149;
+        }
+        
+        .priority-banner {
+            background: var(--bg-tertiary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .priority-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .priority-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .priority-badge.urgent {
+            background: rgba(218, 54, 51, 0.2);
+            color: #f85149;
+        }
+        
+        .priority-badge.high {
+            background: rgba(240, 136, 62, 0.2);
+            color: var(--accent-orange);
+        }
+        
+        .priority-badge.medium {
+            background: rgba(210, 153, 34, 0.2);
+            color: var(--accent-yellow);
+        }
+        
+        .priority-badge.low {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--accent-blue);
+        }
+        
+        .priority-reason {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+        
+        .cluster-stats {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem;
+        }
+        
+        .cluster-stats .stat {
+            color: var(--text-secondary);
+        }
+        
+        .cluster-stats .stat-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+        
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 450px;
+            height: calc(100vh - 120px);
+        }
+        
+        .chart-panel {
+            border-right: 1px solid var(--border-color);
+            padding: 1rem;
+            overflow-y: auto;
+        }
+        
+        #chart-container {
+            width: 100%;
+            height: 400px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 1rem;
+        }
+        
+        .posts-panel {
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        
+        .post-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .post-card:hover {
+            border-color: var(--accent-blue);
+        }
+        
+        .post-card.selected {
+            border-color: var(--accent-green);
+            background: rgba(35, 134, 54, 0.1);
+        }
+        
+        .post-card.llm-suggested {
+            border-color: var(--accent-purple);
+        }
+        
+        .post-card.runner-up {
+            border-color: var(--accent-orange);
+        }
+        
+        .post-badges {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .badge.llm-pick {
+            background: var(--accent-purple);
+            color: white;
+        }
+        
+        .badge.runner-up {
+            background: var(--accent-orange);
+            color: white;
+        }
+        
+        .badge.trigger {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .badge.rank {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .post-position {
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+        
+        .post-time {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .post-content {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        
+        .post-metrics {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            flex-wrap: wrap;
+        }
+        
+        .post-metrics .metric {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .post-metrics .value {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Phase 2 Scores */
+        .phase2-scores {
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+        }
+        
+        .phase2-scores h4 {
+            font-size: 0.75rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .score-item {
+            text-align: center;
+        }
+        
+        .score-label {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+        
+        .score-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+        
+        .score-value.high { color: var(--accent-green); }
+        .score-value.medium { color: var(--accent-yellow); }
+        .score-value.low { color: var(--text-secondary); }
+        
+        .score-bar {
+            width: 100%;
+            height: 3px;
+            background: var(--bg-primary);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 2px;
+        }
+        
+        .score-bar .fill {
+            height: 100%;
+            transition: width 0.3s;
+        }
+        
+        .score-bar .fill.high { background: var(--accent-green); }
+        .score-bar .fill.medium { background: var(--accent-yellow); }
+        .score-bar .fill.low { background: var(--text-secondary); }
+        
+        .mechanism-scores {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--bg-primary);
+        }
+        
+        .mechanism-score {
+            text-align: center;
+        }
+        
+        .mechanism-score .label {
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        
+        .mechanism-score .label.A { color: var(--accent-blue); }
+        .mechanism-score .label.B { color: var(--accent-red); }
+        .mechanism-score .label.C { color: var(--text-secondary); }
+        
+        .mechanism-score .value {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .actions {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: var(--accent-green);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #2ea043;
+        }
+        
+        .btn-primary:disabled {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            cursor: not-allowed;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+        
+        .btn-secondary:hover {
+            background: #30363d;
+        }
+        
+        .btn-danger {
+            background: var(--accent-red);
+            color: white;
+        }
+        
+        .notes-input {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+        
+        .notes-input:focus {
+            outline: none;
+            border-color: var(--accent-blue);
+        }
+        
+        .llm-reasoning {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--accent-purple);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .llm-reasoning h3 {
+            font-size: 0.9rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .llm-reasoning h3::before {
+            content: '🤖';
+        }
+        
+        .llm-reasoning p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .llm-meta {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.8rem;
+        }
+        
+        .llm-meta .item {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+        
+        .llm-meta .label {
+            color: var(--text-secondary);
+        }
+        
+        .llm-meta .value {
+            font-weight: 600;
+        }
+        
+        .mechanism-badge {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .mechanism-badge.A {
+            background: rgba(88, 166, 255, 0.2);
+            color: var(--accent-blue);
+        }
+        
+        .mechanism-badge.B {
+            background: rgba(218, 54, 51, 0.3);
+            color: #f85149;
+        }
+        
+        .mechanism-badge.C {
+            background: rgba(139, 148, 158, 0.2);
+            color: var(--text-secondary);
+        }
+        
+        .back-link {
+            color: var(--accent-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .suspicious-elements {
+            margin-top: 0.5rem;
+            padding: 0.5rem;
+            background: rgba(218, 54, 51, 0.1);
+            border: 1px solid rgba(218, 54, 51, 0.3);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #f85149;
+        }
+        
+        .suspicious-elements::before {
+            content: '⚠️ ';
+        }
+        
+        .btn-expand {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--accent-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .btn-expand:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-blue);
+        }
+        
+        .btn-expand-small {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--accent-blue);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-expand-small:hover {
+            background: var(--bg-primary);
+            border-color: var(--accent-blue);
+        }
+        
+        .post-content-full {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .post-content-full-text {
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 0.95rem;
+        }
+        
+        .post-url {
+            margin-top: 0.5rem;
+            padding-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .btn-danger {
+            background: var(--accent-red);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c93c37;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>
+            <a href="/" class="back-link">← Back to list</a>
+            <h1>Cluster #{{ cluster.cluster_id }} <span style="color: var(--text-secondary); font-weight: 400;">({{ cluster.interval }})</span></h1>
+        </div>
+        <div class="header-meta">
+            <span>{{ cluster.post_count }} posts</span>
+            {% if cluster.trigger_kline_time %}
+            <span>{{ cluster.trigger_kline_time.strftime('%Y-%m-%d %H:%M') }}</span>
+            {% endif %}
+            {% if cluster.trigger_sigma %}
+            <span class="impact-badge {{ 'positive' if cluster.trigger_return_pct and cluster.trigger_return_pct > 0 else 'negative' }}">
+                {{ '%.2f'|format(cluster.trigger_sigma) }}σ
+                ({{ '%+.2f'|format(cluster.trigger_return_pct) if cluster.trigger_return_pct else '0' }}%)
+            </span>
+            {% endif %}
+        </div>
+    </div>
+    
+    <!-- Priority Banner -->
+    {% if cluster.review_priority %}
+    <div class="priority-banner">
+        <div class="priority-info">
+            {% if cluster.review_priority >= 80 %}
+            <span class="priority-badge urgent">🔴 Priority {{ cluster.review_priority }}</span>
+            {% elif cluster.review_priority >= 60 %}
+            <span class="priority-badge high">🟠 Priority {{ cluster.review_priority }}</span>
+            {% elif cluster.review_priority >= 40 %}
+            <span class="priority-badge medium">🟡 Priority {{ cluster.review_priority }}</span>
+            {% else %}
+            <span class="priority-badge low">🔵 Priority {{ cluster.review_priority }}</span>
+            {% endif %}
+            
+            {% if cluster.review_reason %}
+            <span class="priority-reason">{{ cluster.review_reason }}</span>
+            {% endif %}
+        </div>
+        
+        <div class="cluster-stats">
+            {% if cluster.score_spread is not none %}
+            <span class="stat">Score spread: <span class="stat-value">{{ '%.2f'|format(cluster.score_spread) }}</span></span>
+            {% endif %}
+            {% if cluster.cluster_group %}
+            <span class="stat">Group: <span class="stat-value">{{ cluster.cluster_group }}</span></span>
+            {% endif %}
+            {% if cluster.max_sigma_value %}
+            <span class="stat">Max σ: <span class="stat-value">{{ '%.2f'|format(cluster.max_sigma_value) }} ({{ cluster.max_sigma_interval }})</span></span>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+    
+    <div class="main-layout">
+        <div class="chart-panel">
+            <div id="chart-container"></div>
+            
+            {% if cluster.llm_reasoning %}
+            <div class="llm-reasoning">
+                <h3>LLM Analysis</h3>
+                <p>{{ cluster.llm_reasoning }}</p>
+                
+                <div class="llm-meta">
+                    {% if cluster.llm_confidence %}
+                    <div class="item">
+                        <span class="label">Confidence:</span>
+                        <span class="value">{{ '%.0f'|format(cluster.llm_confidence * 100) }}%</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if cluster.llm_mechanism %}
+                    <div class="item">
+                        <span class="label">Mechanism:</span>
+                        <span class="mechanism-badge {{ cluster.llm_mechanism }}">{{ cluster.llm_mechanism }}</span>
+                    </div>
+                    {% endif %}
+                    
+                    {% if cluster.llm_causation_likelihood %}
+                    <div class="item">
+                        <span class="label">Causation:</span>
+                        <span class="value">{{ '%.0f'|format(cluster.llm_causation_likelihood * 100) }}%</span>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="posts-panel">
+            <h3 style="margin-bottom: 1rem; color: var(--text-secondary);">Select the trigger post:</h3>
+            
+            {% for post in posts %}
+            <div class="post-card {% if cluster.llm_suggested_post_id == post.post_id %}llm-suggested{% endif %}{% if post.is_runner_up %} runner-up{% endif %}" 
+                 data-post-id="{{ post.post_id }}"
+                 onclick="selectPost('{{ post.post_id }}')">
+                
+                <div class="post-badges">
+                    {% if cluster.llm_suggested_post_id == post.post_id %}
+                    <span class="badge llm-pick">LLM Pick</span>
+                    {% endif %}
+                    {% if post.is_runner_up %}
+                    <span class="badge runner-up">Runner-up</span>
+                    {% endif %}
+                    {% if post.is_trigger %}
+                    <span class="badge trigger">Validated Trigger</span>
+                    {% endif %}
+                    {% if post.rank_in_cluster %}
+                    <span class="badge rank">Rank #{{ post.rank_in_cluster }}</span>
+                    {% endif %}
+                </div>
+                
+                <div class="post-header">
+                    <span class="post-position">Post {{ post.position_in_cluster }}</span>
+                    <span class="post-time">{{ post.created_at.strftime('%H:%M:%S') }}</span>
+                </div>
+                <div class="post-content">
+                    <div class="post-content-preview">{{ post.content_plain[:300] }}{% if post.content_plain|length > 300 %}...{% endif %}</div>
+                    {% if post.content_plain|length > 300 %}
+                    <button class="btn-expand" onclick="togglePostFull('{{ post.post_id }}')" data-post-id="{{ post.post_id }}">
+                        <span class="expand-text">Show full post</span>
+                    </button>
+                    <div class="post-content-full" id="full-{{ post.post_id }}" style="display: none;">
+                        <div class="post-content-full-text">{{ post.content_plain }}</div>
+                        {% if post.url %}
+                        <div class="post-url">
+                            <a href="{{ post.url }}" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-size: 0.85rem;">
+                                🔗 View on Truth Social
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% else %}
+                    <div class="post-content-full">
+                        <div class="post-content-full-text">{{ post.content_plain }}</div>
+                        {% if post.url %}
+                        <div class="post-url">
+                            <a href="{{ post.url }}" target="_blank" style="color: var(--accent-blue); text-decoration: none; font-size: 0.85rem;">
+                                🔗 View on Truth Social
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <div class="post-metrics">
+                    {% if post.expected_move_pct %}
+                    <div class="metric">
+                        <span>Impact:</span>
+                        <span class="value" style="color: {{ '#3fb950' if post.expected_move_pct > 0 else '#f85149' }}">
+                            {{ '%+.2f'|format(post.expected_move_pct) }}%
+                        </span>
+                    </div>
+                    {% endif %}
+                    {% if post.impact_label %}
+                    <div class="metric">
+                        <span class="value">{{ post.impact_label }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                <!-- Phase 1 Analysis (volledige) -->
+                {% if post.phase1_reasoning or post.impact_likelihood is not none %}
+                <div class="phase2-scores">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4>Phase 1 Analysis</h4>
+                        <button class="btn-expand-small" onclick="togglePhase1Analysis('{{ post.post_id }}')" data-analysis-id="{{ post.post_id }}">
+                            <span class="expand-text-small">Show full analysis</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Compact view -->
+                    <div id="compact-{{ post.post_id }}">
+                    <div class="score-grid">
+                        <div class="score-item">
+                            <div class="score-label">Impact</div>
+                            <div class="score-value {% if post.impact_likelihood >= 0.7 %}high{% elif post.impact_likelihood >= 0.4 %}medium{% else %}low{% endif %}">
+                                {{ '%.0f'|format(post.impact_likelihood * 100) if post.impact_likelihood else '-' }}%
+                            </div>
+                            {% if post.impact_likelihood %}
+                            <div class="score-bar">
+                                <div class="fill {% if post.impact_likelihood >= 0.7 %}high{% elif post.impact_likelihood >= 0.4 %}medium{% else %}low{% endif %}" 
+                                     style="width: {{ post.impact_likelihood * 100 }}%"></div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Suspicion</div>
+                            <div class="score-value {% if post.suspicion_score >= 0.5 %}high{% elif post.suspicion_score >= 0.25 %}medium{% else %}low{% endif %}">
+                                {{ '%.0f'|format(post.suspicion_score * 100) if post.suspicion_score else '-' }}%
+                            </div>
+                            {% if post.suspicion_score %}
+                            <div class="score-bar">
+                                <div class="fill {% if post.suspicion_score >= 0.5 %}high{% elif post.suspicion_score >= 0.25 %}medium{% else %}low{% endif %}" 
+                                     style="width: {{ post.suspicion_score * 100 }}%"></div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Sentiment</div>
+                            <div class="score-value {% if post.sentiment_intensity >= 0.7 %}high{% elif post.sentiment_intensity >= 0.4 %}medium{% else %}low{% endif %}">
+                                {{ '%.0f'|format(post.sentiment_intensity * 100) if post.sentiment_intensity else '-' }}%
+                            </div>
+                            {% if post.sentiment_intensity %}
+                            <div class="score-bar">
+                                <div class="fill {% if post.sentiment_intensity >= 0.7 %}high{% elif post.sentiment_intensity >= 0.4 %}medium{% else %}low{% endif %}" 
+                                     style="width: {{ post.sentiment_intensity * 100 }}%"></div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">News Value</div>
+                            <div class="score-value {% if post.news_value >= 0.7 %}high{% elif post.news_value >= 0.4 %}medium{% else %}low{% endif %}">
+                                {{ '%.0f'|format(post.news_value * 100) if post.news_value else '-' }}%
+                            </div>
+                            {% if post.news_value %}
+                            <div class="score-bar">
+                                <div class="fill {% if post.news_value >= 0.7 %}high{% elif post.news_value >= 0.4 %}medium{% else %}low{% endif %}" 
+                                     style="width: {{ post.news_value * 100 }}%"></div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mechanism-scores">
+                        <div class="mechanism-score">
+                            <div class="label A">Mech A</div>
+                            <div class="value">{{ '%.0f'|format(post.mechanism_a_score * 100) if post.mechanism_a_score else '-' }}%</div>
+                        </div>
+                        <div class="mechanism-score">
+                            <div class="label B">Mech B</div>
+                            <div class="value">{{ '%.0f'|format(post.mechanism_b_score * 100) if post.mechanism_b_score else '-' }}%</div>
+                        </div>
+                        <div class="mechanism-score">
+                            <div class="label C">Mech C</div>
+                            <div class="value">{{ '%.0f'|format(post.mechanism_c_score * 100) if post.mechanism_c_score else '-' }}%</div>
+                        </div>
+                    </div>
+                    
+                        {% if post.suspicious_elements %}
+                        <div class="suspicious-elements">{{ post.suspicious_elements }}</div>
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Full analysis view -->
+                    <div id="full-analysis-{{ post.post_id }}" style="display: none;">
+                        {% if post.phase1_reasoning %}
+                        <div style="background: var(--bg-primary); padding: 0.75rem; border-radius: 4px; margin-bottom: 0.75rem;">
+                            <div style="font-size: 0.75rem; color: var(--accent-purple); margin-bottom: 0.25rem; font-weight: 600;">LLM Reasoning:</div>
+                            <div style="font-size: 0.85rem; color: var(--text-primary); white-space: pre-wrap;">{{ post.phase1_reasoning }}</div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if post.detected_numbers %}
+                        <div style="margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.7rem; color: var(--text-secondary);">Detected Numbers:</span>
+                            <span style="font-size: 0.85rem; color: var(--text-primary);">{{ post.detected_numbers }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if post.unusual_phrases %}
+                        <div style="margin-bottom: 0.5rem;">
+                            <span style="font-size: 0.7rem; color: var(--text-secondary);">Unusual Phrases:</span>
+                            <span style="font-size: 0.85rem; color: var(--text-primary);">{{ post.unusual_phrases }}</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if post.confidence_calibration is not none %}
+                        <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--bg-primary);">
+                            <span style="font-size: 0.7rem; color: var(--text-secondary);">Confidence Calibration:</span>
+                            <span style="font-size: 0.85rem; color: var(--text-primary); font-weight: 600;">{{ '%.0f'|format(post.confidence_calibration * 100) }}%</span>
+                        </div>
+                        {% endif %}
+                        
+                        {% if post.phase1_model %}
+                        <div style="margin-top: 0.25rem; font-size: 0.7rem; color: var(--text-secondary);">
+                            Model: {{ post.phase1_model }}
+                            {% if post.phase1_analyzed_at %}
+                            | Analyzed: {{ post.phase1_analyzed_at.strftime('%Y-%m-%d %H:%M') }}
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <div class="actions">
+        <form id="validate-form" action="/api/validate/{{ cluster.cluster_id }}" method="POST" style="display: flex; gap: 1rem; flex: 1; align-items: center;">
+            <input type="hidden" name="selected_post_id" id="selected-post-id" value="">
+            <input type="text" name="review_notes" class="notes-input" placeholder="Optional notes...">
+            <button type="submit" class="btn btn-primary" id="validate-btn" disabled>Validate Selection</button>
+        </form>
+        <form action="/api/no-impact/{{ cluster.cluster_id }}" method="POST" style="display: inline;">
+            <input type="hidden" name="review_notes" value="No Trump post caused this price movement">
+            <button type="submit" class="btn btn-danger">No Impact</button>
+        </form>
+        <form action="/api/skip/{{ cluster.cluster_id }}" method="POST" style="display: inline;">
+            <button type="submit" class="btn btn-secondary">Skip Cluster</button>
+        </form>
+    </div>
+    
+    <script>
+        let selectedPostId = null;
+        
+        function selectPost(postId) {
+            // Remove previous selection
+            document.querySelectorAll('.post-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selection to clicked card
+            const card = document.querySelector(`[data-post-id="${postId}"]`);
+            card.classList.add('selected');
+            
+            // Update hidden input and enable button
+            selectedPostId = postId;
+            document.getElementById('selected-post-id').value = postId;
+            document.getElementById('validate-btn').disabled = false;
+        }
+        
+        // Initialize chart
+        async function initChart() {
+            const container = document.getElementById('chart-container');
+            
+            const chart = LightweightCharts.createChart(container, {
+                layout: {
+                    background: { color: '#161b22' },
+                    textColor: '#8b949e',
+                },
+                grid: {
+                    vertLines: { color: '#21262d' },
+                    horzLines: { color: '#21262d' },
+                },
+                crosshair: {
+                    mode: LightweightCharts.CrosshairMode.Normal,
+                },
+                rightPriceScale: {
+                    borderColor: '#30363d',
+                },
+                timeScale: {
+                    borderColor: '#30363d',
+                    timeVisible: true,
+                    secondsVisible: false,
+                },
+            });
+            
+            const candlestickSeries = chart.addCandlestickSeries({
+                upColor: '#238636',
+                downColor: '#da3633',
+                borderDownColor: '#da3633',
+                borderUpColor: '#238636',
+                wickDownColor: '#da3633',
+                wickUpColor: '#238636',
+            });
+            
+            // Fetch kline data
+            try {
+                const response = await fetch('/api/klines/{{ cluster.cluster_id }}');
+                const data = await response.json();
+                
+                if (data.klines && data.klines.length > 0) {
+                    candlestickSeries.setData(data.klines);
+                    
+                    // Add markers for posts
+                    if (data.markers) {
+                        const markers = data.markers.map(m => ({
+                            time: m.time,
+                            position: 'belowBar',
+                            color: m.post_id === '{{ cluster.llm_suggested_post_id }}' ? '#8957e5' : '#58a6ff',
+                            shape: 'arrowUp',
+                            text: `P${m.position}`,
+                        }));
+                        candlestickSeries.setMarkers(markers);
+                    }
+                    
+                    // Fit content
+                    chart.timeScale().fitContent();
+                }
+            } catch (error) {
+                console.error('Failed to load chart data:', error);
+                container.innerHTML = '<p style="padding: 2rem; color: #8b949e;">Failed to load chart data</p>';
+            }
+        }
+        
+        // Pre-select LLM suggested post if available
+        {% if cluster.llm_suggested_post_id %}
+        selectPost('{{ cluster.llm_suggested_post_id }}');
+        {% endif %}
+        
+        // Initialize chart on load
+        initChart();
+        
+        // Toggle full post content
+        function togglePostFull(postId) {
+            const fullDiv = document.getElementById(`full-${postId}`);
+            const previewDiv = document.querySelector(`[data-post-id="${postId}"] .post-content-preview`);
+            const btn = document.querySelector(`[data-post-id="${postId}"].btn-expand`);
+            
+            if (fullDiv.style.display === 'none') {
+                fullDiv.style.display = 'block';
+                if (previewDiv) previewDiv.style.display = 'none';
+                if (btn) btn.querySelector('.expand-text').textContent = 'Hide full post';
+            } else {
+                fullDiv.style.display = 'none';
+                if (previewDiv) previewDiv.style.display = 'block';
+                if (btn) btn.querySelector('.expand-text').textContent = 'Show full post';
+            }
+        }
+        
+        // Toggle Phase 1 analysis
+        function togglePhase1Analysis(postId) {
+            const compactDiv = document.getElementById(`compact-${postId}`);
+            const fullDiv = document.getElementById(`full-analysis-${postId}`);
+            const btn = document.querySelector(`[data-analysis-id="${postId}"].btn-expand-small`);
+            
+            if (fullDiv.style.display === 'none') {
+                compactDiv.style.display = 'none';
+                fullDiv.style.display = 'block';
+                if (btn) btn.querySelector('.expand-text-small').textContent = 'Show compact';
+            } else {
+                compactDiv.style.display = 'block';
+                fullDiv.style.display = 'none';
+                if (btn) btn.querySelector('.expand-text-small').textContent = 'Show full analysis';
+            }
+        }
+    </script>
+</body>
+</html>

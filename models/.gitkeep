@@ -1,0 +1,5 @@
+# Placeholder voor models directory
+# Output bestanden:
+# - trump_signal_llama3b/ (directory met GGUF model na training)
+# - lora_adapter/ (LoRA weights voor later gebruik)
+

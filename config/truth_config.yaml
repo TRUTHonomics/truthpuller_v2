@@ -1,0 +1,127 @@
+# Truthpuller v2 Configuration
+# Windows-native versie met lokaal getraind LLM
+
+# Database settings (KFLhyper op Linux PC via SSH tunnel)
+# VEREIST: SSH tunnel moet draaien: ssh -L 15432:localhost:5432 bart@10.10.10.1
+database:
+  host: "localhost"
+  port: 15432
+  dbname: "KFLhyper"
+  user: "postgres"
+  password: "1234"
+  schema: "truth"
+
+# LLM Service settings
+llm:
+  # LM Studio of llama.cpp server endpoint
+  base_url: "http://localhost:1234/v1"
+  model: "trump_signal_llama3b"
+  timeout: 3600
+  max_retries: 3
+  temperature: 0.1  # Lage temp voor consistente trading signals
+  max_tokens: 2048  # Maximum output tokens (voor signal generator)
+
+# Signal Generator settings
+signal_generator:
+  # Polling interval in seconden
+  poll_interval: 30
+  # Alleen posts van deze accounts verwerken
+  accounts:
+    - "realDonaldTrump"
+    - "OrangeAlert"
+  # TRUMP coin asset configuratie
+  trump_asset_symbol: "TRUMPUSDT"
+  # Altijd TRUMP coin meenemen in signaalanalyse
+  always_include_trump: true
+
+# Impact Analysis settings (voor dataset building)
+impact_analysis:
+  # Minimum datum voor posts - TRUMP coin lanceerde op 2025-01-17
+  # Posts van voor deze datum hebben geen kline data beschikbaar
+  min_post_date: "2025-01-17T17:00:00+00:00"
+  
+  # Measurement windows: hoeveel minuten NA de post meten we de koersverandering
+  # Script gebruikt meerdere kline intervallen (1m, 5m, 15m, 1h, 4h, 12h)
+  # en meet voor elk interval de verandering over deze windows
+  timeframes:
+    - 15    # 15 minuten na post
+    - 60    # 1 uur na post
+    - 240   # 4 uur na post
+    - 720   # 12 uur na post
+  
+  # Threshold methode: "fixed" of "sigma"
+  # - fixed: vaste percentages (1%, 3%, 5%)
+  # - sigma: multipliers van standaarddeviatie (σ) van returns
+  threshold_method: "sigma"
+  
+  # Vaste drempels (gebruikt bij threshold_method: fixed)
+  thresholds:
+    weak_move_pct: 1.0          # >1% = WEAK_IMPACT
+    significant_move_pct: 3.0   # >3% = MODERATE_IMPACT
+    strong_move_pct: 5.0        # >5% = STRONG_IMPACT
+  
+  # Sigma-gebaseerde drempels (gebruikt bij threshold_method: sigma)
+  # REASON: 3% op een rustige dag is veel, op een volatiele dag niet
+  # Sigma = standaarddeviatie van returns over de baseline periode
+  # Drempels in "n × sigma move" eenheden
+  sigma_thresholds:
+    weak_sigma: 1.0        # >1σ = WEAK_IMPACT
+    moderate_sigma: 2.0    # >2σ = MODERATE_IMPACT  
+    strong_sigma: 3.0      # >3σ = STRONG_IMPACT
+  
+  # Volume spike threshold (x baseline)
+  volume_spike_multiplier: 2.0
+  # Baseline periode voor volatiliteitsberekening (in uren)
+  baseline_hours: 24
+  # Minimum aantal klines voor sigma berekening
+  min_klines_for_sigma: 20
+  # NOTE: Look-ahead bias wordt voorkomen door alleen klines te gebruiken
+  # die BESCHIKBAAR waren op het meetmoment (close_time <= measurement_time)
+
+# Cluster Detection settings (oude time-proximity methode)
+cluster_detection:
+  # Posts binnen dit tijdsvenster worden als cluster beschouwd
+  window_minutes: 15
+  # Minimum impact om cluster te markeren voor review
+  min_impact_pct: 1.0
+
+# Event-Driven Clustering (nieuwe methode - aanbevolen)
+# Detecteert koersbewegingen en kijkt terug naar posts
+event_clustering:
+  # Sigma threshold voor significante koersbeweging
+  sigma_threshold: 2.0
+  # Lookback window: hoeveel uur voor de beweging posts ophalen
+  lookback_hours: 4
+  # Events binnen dit window worden samengevoegd (deduplicatie)
+  dedup_window_hours: 1.0
+  # Baseline periode voor sigma berekening
+  baseline_hours: 24
+  # Minimum klines voor sigma berekening
+  min_klines_for_sigma: 20
+
+# LLM Cluster Analyzer settings (voor labeling)
+cluster_analyzer:
+  # Model voor cluster analyse (via LM Studio)
+  # Gebruikt: Qwen2.5 32B i1-Q4_K_M met 43 layers GPU offload
+  # API identifier: qwen2.5-32b-instruct-i1
+  model: qwen2.5-32b-instruct-i1
+  temperature: 0.3
+  max_tokens: 1024  # Genoeg voor cluster rankings (10 posts × 60 tokens + overhead)
+  context_length: 10240  # Basis context length (verhoogt automatisch bij overflow)
+  max_context_length: 24576  # Maximum context length voor retry
+
+# Review Interface settings
+review_interface:
+  host: "localhost"
+  port: 8082  # Note: 8080-8081 zijn in gebruik, gebruik 8082
+  # Chart configuratie
+  chart_interval: "15m"
+  chart_hours_before: 1
+  chart_hours_after: 4
+
+# Logging
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "_log/truthpuller_v2.log"
+

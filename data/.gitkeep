@@ -1,0 +1,6 @@
+# Placeholder voor data directory
+# Output bestanden:
+# - price_impact_analysis.csv (van analyze_price_impact.py)
+# - training_dataset.jsonl (van build_training_dataset.py)
+# - train.jsonl / val.jsonl (train/val split)
+

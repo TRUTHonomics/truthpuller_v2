@@ -1,0 +1,274 @@
+# Non-Crypto Assets Configuration
+# Handmatig beheerde lijst van niet-crypto assets voor referentie detectie
+# 
+# Structure per asset:
+# [assets.<KEY>]
+# name = "<full name>"
+# tickers = ["TICKER1", "TICKER2", ...]  # variations for text matching
+# asset_type = "stock|commodity|etf|index|currency"
+# asset_id = null  # Optional: kan later gekoppeld worden aan symbols.symbols
+
+[meta]
+asset_type = "non_crypto"
+version = "1.0"
+description = "Non-cryptocurrency assets for reference detection"
+
+[assets]
+
+# ============================================================================
+# Precious Metals / Commodities
+# ============================================================================
+
+[assets.GOLD]
+name = "Gold"
+tickers = ["GOLD", "XAU", "XAUUSD", "GLD", "GOLD STANDARD"]
+asset_type = "commodity"
+
+[assets.SILVER]
+name = "Silver"
+tickers = ["SILVER", "XAG", "XAGUSD", "SLV"]
+asset_type = "commodity"
+
+[assets.PLATINUM]
+name = "Platinum"
+tickers = ["PLATINUM", "XPT", "PPLT"]
+asset_type = "commodity"
+
+[assets.PALLADIUM]
+name = "Palladium"
+tickers = ["PALLADIUM", "XPD", "PALL"]
+asset_type = "commodity"
+
+[assets.OIL]
+name = "Crude Oil"
+tickers = ["OIL", "CRUDE OIL", "WTI", "BRENT", "USO", "CL"]
+asset_type = "commodity"
+
+[assets.NATURAL_GAS]
+name = "Natural Gas"
+tickers = ["NATURAL GAS", "NATGAS", "NG", "UNG"]
+asset_type = "commodity"
+
+# ============================================================================
+# Major Tech Stocks
+# ============================================================================
+
+[assets.NVIDIA]
+name = "NVIDIA Corporation"
+tickers = ["NVIDIA", "NVDA", "NVDIA"]
+asset_type = "stock"
+
+[assets.TESLA]
+name = "Tesla Inc"
+tickers = ["TESLA", "TSLA"]
+asset_type = "stock"
+
+[assets.APPLE]
+name = "Apple Inc"
+tickers = ["APPLE", "AAPL"]
+asset_type = "stock"
+
+[assets.MICROSOFT]
+name = "Microsoft Corporation"
+tickers = ["MICROSOFT", "MSFT"]
+asset_type = "stock"
+
+[assets.AMAZON]
+name = "Amazon.com Inc"
+tickers = ["AMAZON", "AMZN"]
+asset_type = "stock"
+
+[assets.GOOGLE]
+name = "Alphabet Inc"
+tickers = ["GOOGLE", "GOOGL", "GOOG", "ALPHABET"]
+asset_type = "stock"
+
+[assets.META]
+name = "Meta Platforms Inc"
+tickers = ["META", "FACEBOOK", "FB"]
+asset_type = "stock"
+
+[assets.AMD]
+name = "Advanced Micro Devices"
+tickers = ["AMD"]
+asset_type = "stock"
+
+[assets.INTEL]
+name = "Intel Corporation"
+tickers = ["INTEL", "INTC"]
+asset_type = "stock"
+
+[assets.COINBASE]
+name = "Coinbase Global Inc"
+tickers = ["COINBASE", "COIN"]
+asset_type = "stock"
+
+[assets.MICROSTRATEGY]
+name = "MicroStrategy Inc"
+tickers = ["MICROSTRATEGY", "MSTR"]
+asset_type = "stock"
+
+[assets.PALANTIR]
+name = "Palantir Technologies"
+tickers = ["PALANTIR", "PLTR"]
+asset_type = "stock"
+
+[assets.TWITTER]
+name = "Twitter/X"
+tickers = ["TWITTER", "X", "TWTR"]
+asset_type = "stock"
+
+# ============================================================================
+# Financial / Banks
+# ============================================================================
+
+[assets.JPMORGAN]
+name = "JPMorgan Chase"
+tickers = ["JPMORGAN", "JPM", "JP MORGAN"]
+asset_type = "stock"
+
+[assets.GOLDMAN]
+name = "Goldman Sachs"
+tickers = ["GOLDMAN SACHS", "GS", "GOLDMAN"]
+asset_type = "stock"
+
+[assets.BLACKROCK]
+name = "BlackRock Inc"
+tickers = ["BLACKROCK", "BLK"]
+asset_type = "stock"
+
+[assets.VISA]
+name = "Visa Inc"
+tickers = ["VISA", "V"]
+asset_type = "stock"
+
+[assets.MASTERCARD]
+name = "Mastercard Inc"
+tickers = ["MASTERCARD", "MA"]
+asset_type = "stock"
+
+[assets.PAYPAL]
+name = "PayPal Holdings"
+tickers = ["PAYPAL", "PYPL"]
+asset_type = "stock"
+
+[assets.SQUARE]
+name = "Block Inc (Square)"
+tickers = ["SQUARE", "SQ", "BLOCK"]
+asset_type = "stock"
+
+[assets.ROBINHOOD]
+name = "Robinhood Markets"
+tickers = ["ROBINHOOD", "HOOD"]
+asset_type = "stock"
+
+# ============================================================================
+# Major ETFs
+# ============================================================================
+
+[assets.SPY]
+name = "SPDR S&P 500 ETF"
+tickers = ["SPY", "S&P 500", "SP500", "S&P"]
+asset_type = "etf"
+
+[assets.QQQ]
+name = "Invesco QQQ Trust"
+tickers = ["QQQ", "NASDAQ", "NASDAQ 100"]
+asset_type = "etf"
+
+[assets.IWM]
+name = "iShares Russell 2000 ETF"
+tickers = ["IWM", "RUSSELL 2000", "RUSSELL"]
+asset_type = "etf"
+
+[assets.DIA]
+name = "SPDR Dow Jones Industrial ETF"
+tickers = ["DIA", "DOW JONES", "DOW", "DJIA"]
+asset_type = "etf"
+
+[assets.ARKK]
+name = "ARK Innovation ETF"
+tickers = ["ARKK", "ARK"]
+asset_type = "etf"
+
+[assets.GBTC]
+name = "Grayscale Bitcoin Trust"
+tickers = ["GBTC", "GRAYSCALE"]
+asset_type = "etf"
+
+[assets.IBIT]
+name = "iShares Bitcoin Trust"
+tickers = ["IBIT"]
+asset_type = "etf"
+
+# ============================================================================
+# Market Indices
+# ============================================================================
+
+[assets.VIX]
+name = "CBOE Volatility Index"
+tickers = ["VIX", "VOLATILITY INDEX", "FEAR INDEX"]
+asset_type = "index"
+
+# ============================================================================
+# Fiat Currencies
+# ============================================================================
+
+[assets.USD]
+name = "US Dollar"
+tickers = ["USD", "DOLLAR", "US DOLLAR", "USDX", "DXY"]
+asset_type = "currency"
+
+[assets.EUR]
+name = "Euro"
+tickers = ["EUR", "EURO"]
+asset_type = "currency"
+
+[assets.GBP]
+name = "British Pound"
+tickers = ["GBP", "POUND", "STERLING"]
+asset_type = "currency"
+
+[assets.JPY]
+name = "Japanese Yen"
+tickers = ["JPY", "YEN"]
+asset_type = "currency"
+
+[assets.CNY]
+name = "Chinese Yuan"
+tickers = ["CNY", "YUAN", "RMB", "RENMINBI"]
+asset_type = "currency"
+
+# ============================================================================
+# Trump-related Companies
+# ============================================================================
+
+[assets.DJT]
+name = "Trump Media & Technology Group"
+tickers = ["DJT", "TMTG", "TRUTH SOCIAL"]
+asset_type = "stock"
+
+[assets.DWAC]
+name = "Digital World Acquisition Corp"
+tickers = ["DWAC"]
+asset_type = "stock"
+
+# ============================================================================
+# Other Notable Assets
+# ============================================================================
+
+[assets.GAMESTOP]
+name = "GameStop Corp"
+tickers = ["GAMESTOP", "GME"]
+asset_type = "stock"
+
+[assets.AMC]
+name = "AMC Entertainment"
+tickers = ["AMC"]
+asset_type = "stock"
+
+[assets.BERKSHIRE]
+name = "Berkshire Hathaway"
+tickers = ["BERKSHIRE", "BRK", "BRKA", "BRKB"]
+asset_type = "stock"
+

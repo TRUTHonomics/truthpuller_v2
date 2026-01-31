@@ -1,0 +1,31 @@
+# Truthpuller v2 - Training dependencies (WSL2 only)
+# Installeer in WSL2 Ubuntu omgeving
+
+# Unsloth voor efficiënt fine-tunen
+# Installeer via: pip install "unsloth[colab-new] @ git+https://github.com/unslothai/unsloth.git"
+
+# PyTorch met CUDA (installeer eerst via conda of pip met juiste CUDA versie)
+# pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+# Hugging Face libraries
+transformers>=4.36.0
+datasets>=2.16.0
+accelerate>=0.25.0
+peft>=0.7.0
+
+# Training
+trl>=0.7.4
+bitsandbytes>=0.41.0
+
+# Quantization export
+# Voor GGUF export naar llama.cpp format
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Database (voor dataset building)
+psycopg2-binary>=2.9.9
+python-dotenv>=1.0.0
+pyyaml>=6.0.1
+
