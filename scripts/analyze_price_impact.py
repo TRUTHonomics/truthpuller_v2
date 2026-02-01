@@ -25,62 +25,12 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 # Onderdruk SQLAlchemy warnings van pandas
-warnings.filterwarnings('ignore', message='.*pandas only supports SQLAlchemy.*')
+warnings.filterwarnings("ignore", message=".*pandas only supports SQLAlchemy.*")
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.kfl_logging import setup_kfl_logging
 
-def setup_logging() -> logging.Logger:
-    """
-    Setup logging met file output en archivering van bestaande logs.
-    
-    Returns:
-        Configured logger
-    """
-    # Bepaal log directory
-    script_dir = Path(__file__).parent.parent
-    log_dir = script_dir / '_log'
-    archive_dir = log_dir / 'archive'
-    
-    # Maak directories aan
-    log_dir.mkdir(parents=True, exist_ok=True)
-    archive_dir.mkdir(parents=True, exist_ok=True)
-    
-    # Log bestandsnaam
-    log_file = log_dir / 'analyze_price_impact.log'
-    
-    # Archiveer bestaand log bestand indien aanwezig
-    if log_file.exists():
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        archive_name = f'analyze_price_impact_{timestamp}.log'
-        archive_path = archive_dir / archive_name
-        shutil.move(str(log_file), str(archive_path))
-    
-    # Configureer logger
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-    
-    # Verwijder bestaande handlers
-    logger.handlers.clear()
-    
-    # Console handler
-    console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(logging.INFO)
-    console_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-    console_handler.setFormatter(console_format)
-    
-    # File handler
-    file_handler = logging.FileHandler(log_file, encoding='utf-8')
-    file_handler.setLevel(logging.DEBUG)
-    file_format = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    file_handler.setFormatter(file_format)
-    
-    logger.addHandler(console_handler)
-    logger.addHandler(file_handler)
-    
-    return logger
-
-
-# Setup logging
-logger = setup_logging()
+logger = setup_kfl_logging()
 
 
 class PriceImpactAnalyzer:

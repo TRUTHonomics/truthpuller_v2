@@ -30,9 +30,9 @@ import yaml
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-# Setup logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+from src.kfl_logging import setup_kfl_logging
+
+logger = setup_kfl_logging("app")
 
 # Load config
 config_path = Path(__file__).parent.parent / 'config' / 'truth_config.yaml'

@@ -22,12 +22,10 @@ import yaml
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.kfl_logging import setup_kfl_logging
+
+logger = setup_kfl_logging()
 
 
 # Common crypto name mappings (base symbol -> full names/aliases)

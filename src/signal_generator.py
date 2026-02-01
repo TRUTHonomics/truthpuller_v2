@@ -26,32 +26,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from src.database import TruthDatabase
 from src.llm_client import LLMClient
+from src.kfl_logging import setup_kfl_logging
 
-# Setup logging
-def setup_logging(config: Dict[str, Any]):
-    """Configure logging based on config."""
-    log_config = config.get('logging', {})
-    log_level = getattr(logging, log_config.get('level', 'INFO'))
-    log_format = log_config.get('format', '%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    
-    # Create log directory
-    log_file = log_config.get('file')
-    if log_file:
-        log_path = Path(__file__).parent.parent / log_file
-        log_path.parent.mkdir(parents=True, exist_ok=True)
-        
-        logging.basicConfig(
-            level=log_level,
-            format=log_format,
-            handlers=[
-                logging.FileHandler(log_path, encoding='utf-8'),
-                logging.StreamHandler()
-            ]
-        )
-    else:
-        logging.basicConfig(level=log_level, format=log_format)
-
-logger = logging.getLogger(__name__)
+logger = setup_kfl_logging("signal_generator")
 
 
 class SignalGenerator:
@@ -72,11 +49,9 @@ class SignalGenerator:
         if config_path is None:
             config_path = Path(__file__).parent.parent / 'config' / 'truth_config.yaml'
         
-        with open(config_path, 'r', encoding='utf-8') as f:
+        with open(config_path, "r", encoding="utf-8") as f:
             self.config = yaml.safe_load(f)
-        
-        setup_logging(self.config)
-        
+
         # Initialize components
         self.db = TruthDatabase(self.config['database'])
         self.llm = LLMClient(self.config['llm'])

@@ -37,46 +37,12 @@ from prompt_loader import get_system_prompt, get_phase1_prompt
 # Voeg parent directory toe aan path voor config imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
 from config.prompts.schemas import get_response_format
+from src.kfl_logging import setup_kfl_logging
 
 # Onderdruk warnings
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 
-
-def setup_logging() -> logging.Logger:
-    """Setup logging met file output en archivering."""
-    script_dir = Path(__file__).parent.parent
-    log_dir = script_dir / '_log'
-    archive_dir = log_dir / 'archive'
-    
-    log_dir.mkdir(parents=True, exist_ok=True)
-    archive_dir.mkdir(parents=True, exist_ok=True)
-    
-    log_file = log_dir / 'analyze_posts_phase1.log'
-    
-    if log_file.exists():
-        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        archive_path = archive_dir / f'analyze_posts_phase1_{timestamp}.log'
-        shutil.move(str(log_file), str(archive_path))
-    
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-    logger.handlers.clear()
-    
-    console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setLevel(logging.INFO)
-    console_handler.setFormatter(logging.Formatter('%(asctime)s - %(levelname)s - %(message)s'))
-    
-    file_handler = logging.FileHandler(log_file, encoding='utf-8')
-    file_handler.setLevel(logging.DEBUG)
-    file_handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
-    
-    logger.addHandler(console_handler)
-    logger.addHandler(file_handler)
-    
-    return logger
-
-
-logger = setup_logging()
+logger = setup_kfl_logging()
 
 
 class PostAnalyzerPhase1:

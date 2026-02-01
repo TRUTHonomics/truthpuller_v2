@@ -23,24 +23,22 @@ from pathlib import Path
 from typing import Optional
 import torch
 
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from src.kfl_logging import setup_kfl_logging
+
+logger = setup_kfl_logging()
+
 # Check of we in WSL2 draaien
 def check_wsl():
     """Check if running in WSL2."""
     try:
-        with open('/proc/version', 'r') as f:
+        with open("/proc/version", "r") as f:
             version = f.read().lower()
-            if 'microsoft' in version or 'wsl' in version:
+            if "microsoft" in version or "wsl" in version:
                 return True
-    except:
+    except Exception:
         pass
     return False
-
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
 
 
 def load_dataset(data_path: Path):

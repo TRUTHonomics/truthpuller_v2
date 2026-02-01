@@ -17,15 +17,10 @@ from psycopg2.extras import RealDictCursor
 # Voeg parent directory toe aan path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Import SSH tunnel functie
+from src.kfl_logging import setup_kfl_logging
 from scripts.analyze_clusters_phase2 import ensure_ssh_tunnel
 
-# Setup logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s'
-)
-logger = logging.getLogger(__name__)
+logger = setup_kfl_logging()
 
 
 def get_db_connection():
